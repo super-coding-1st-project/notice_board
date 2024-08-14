@@ -46,12 +46,8 @@ public class SecurityConfiguration {
                 )
                 .authorizeHttpRequests(authorize->authorize
                         .requestMatchers("/resources/static/**","/api/signup","/api/login").permitAll() //인가 설정 , signup, login 페이지는 누구에게나
-                        .requestMatchers("/api/posts","/api/logout").hasRole("USER") //인가 설정, 포스트와 로그아웃 페이지는 USER에게만
+                        .requestMatchers("/api/posts","/api/logout").hasRole("USER") //인가 설정, 포스트와 로그아웃 요청은 USER에게만
                 )
-//                .exceptionHandling(exceptionHandler -> exceptionHandler
-//                        .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
-//                        .accessDeniedHandler(new CustomerAccessDeniedHandler())
-//                )
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
         //필터 순서를 설정하는데 UsernamePasswordAuthenticationFilter보다 앞에(before) JwtAuthenticationFilter를 적용하도록 설정
 
