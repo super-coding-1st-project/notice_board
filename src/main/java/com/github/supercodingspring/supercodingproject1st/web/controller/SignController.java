@@ -20,6 +20,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 @CrossOrigin
+
 public class SignController {
     private final SignupService signupService;
     private final LoginService loginService;
