@@ -1,0 +1,18 @@
+server:
+  port: 8080
+
+datasource:
+  username: ${DATABASE_USERNAME}
+  password: ${DATABASE_PASSWORD}
+  url: jdbc:mysql://localhost:3306/superCodingProject1st
+  driver-class-name: com.mysql.cj.jdbc.Driver
+
+jwt:
+  secret-key-source : ${JWT_SECRET_KEY}
+
+logging:
+  config: classpath:logback-spring-local.xml
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
