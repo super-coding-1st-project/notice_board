@@ -1,7 +1,6 @@
 package com.github.supercodingspring.supercodingproject1st.web.filter;
 
 import com.github.supercodingspring.supercodingproject1st.config.security.JwtTokenProvider;
-import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,7 +23,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String jwtToken = jwtTokenProvider.resolveToken(request);
 
         if(jwtToken != null && jwtTokenProvider.validateToken(jwtToken)) {
-            Authentication auth = jwtTokenProvider.getAuthentication(jwtToken);
+            Authentication auth = jwtTokenProvider.createAuthentication(jwtToken);
             SecurityContextHolder.getContext().setAuthentication(auth);
         }
         filterChain.doFilter(request, response);

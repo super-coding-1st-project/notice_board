@@ -48,6 +48,7 @@ public class LoginService {
             String token = jwtTokenProvider.createToken(email,user.getUserName()); // email과 사용자 이름을 넣은 토큰 생성
             response.setHeader("X-AUTH-TOKEN", token); //X-AUTH-TOKEN 이라는 헤더 이름으로 토큰을 넣어 설정
 
+
             responseBody.put("message","성공적으로 로그인하였습니다.");
             return ResponseEntity.ok(responseBody);
         }catch (Exception e){

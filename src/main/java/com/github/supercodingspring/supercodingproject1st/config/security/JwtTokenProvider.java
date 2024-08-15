@@ -1,5 +1,7 @@
 package com.github.supercodingspring.supercodingproject1st.config.security;
 
+import com.github.supercodingspring.supercodingproject1st.repository.token.Token;
+import com.github.supercodingspring.supercodingproject1st.repository.token.tokenJpaRepository;
 import io.jsonwebtoken.*;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
@@ -7,7 +9,6 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,10 +17,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
 public class JwtTokenProvider {
+    private final tokenJpaRepository tokenJpaRepository;
     private static final Logger log = LoggerFactory.getLogger(JwtTokenProvider.class);
     @Value("${jwt.secret-key-source}")
     private String secretKeySource;
@@ -41,7 +44,9 @@ public class JwtTokenProvider {
     }
 
     //토큰 유효성 검증
+
     public boolean validateToken(String jwtToken) {
+
         try {
             Claims claims = Jwts.parser() //jwt 파싱하기 위한 빌더 객체 생성.
                     .setSigningKey(this.secretKey) //jwt 검증 시 사용할 비밀키 설정, JWT에 서명된 키와 동일해야함.
@@ -74,7 +79,7 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public Authentication getAuthentication(String jwtToken) {
+    public Authentication createAuthentication(String jwtToken) {
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(getUserEmail(jwtToken));
         return new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     }

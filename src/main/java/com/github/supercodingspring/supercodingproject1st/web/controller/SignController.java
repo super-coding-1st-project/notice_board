@@ -6,6 +6,7 @@ import com.github.supercodingspring.supercodingproject1st.service.SignupService;
 import com.github.supercodingspring.supercodingproject1st.web.dto.LoginRequest;
 import com.github.supercodingspring.supercodingproject1st.web.dto.LogoutRequest;
 import com.github.supercodingspring.supercodingproject1st.web.dto.SignupRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -37,8 +38,8 @@ public class SignController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<Map<String, String>> logout(@RequestBody LogoutRequest logoutRequest, HttpServletResponse response) {
-        return logoutService.logout(logoutRequest, response);
+    public ResponseEntity<Map<String, String>> logout(@RequestBody LogoutRequest logoutRequest, HttpServletRequest request, HttpServletResponse response) {
+        return logoutService.logout(logoutRequest, request, response);
     }
 
 }
