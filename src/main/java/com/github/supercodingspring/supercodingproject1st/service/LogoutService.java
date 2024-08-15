@@ -17,16 +17,25 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class LogoutService {
+    private final JwtTokenProvider jwtTokenProvider;
+
     //프론트엔드에서 클라이언트의 로컬스토리지에 저장된 토큰을 삭제함으로써 로그아웃 기능 구현.
     public ResponseEntity<Map<String, String>> logout(LogoutRequest logoutRequest, HttpServletRequest request, HttpServletResponse response) {
-        String jwtToken = response.getHeader("X-AUTH-TOKEN"); //클라이언트가 요청한 헤더에서 X-AUTH-TOKEN을 가져와 변수에 저장
+        Map<String, String> responseBody = new HashMap<>();
+        String jwtToken = request.getHeader("X-AUTH-TOKEN"); //클라이언트가 요청한 헤더에서 X-AUTH-TOKEN을 가져와 변수에 저장
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(jwtToken == null || !jwtTokenProvider.validateToken(jwtToken)){
+            responseBody.put("error", "Invalid JWT token");
+            return ResponseEntity.badRequest().body(responseBody);
+        }
+
+        jwtTokenProvider.invalidateToken(jwtToken); //토큰 무효 처리
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); //현재 저장된 인증 정보를 로그아웃 처리
         if (authentication != null) {
             new SecurityContextLogoutHandler().logout(request, response, authentication);
         }
 
-        Map<String, String> responseBody = new HashMap<>();
         responseBody.put("message","로그아웃 되었습니다.");
 
         return ResponseEntity.ok(responseBody);

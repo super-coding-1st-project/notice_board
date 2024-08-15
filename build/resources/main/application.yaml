@@ -9,6 +9,7 @@ datasource:
 
 jwt:
   secret-key-source : ${JWT_SECRET_KEY}
+  token-valid-time : ${TOKEN_VALID_TIME}
 
 logging:
   config: classpath:logback-spring-local.xml

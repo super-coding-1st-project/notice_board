@@ -1,7 +1,7 @@
 package com.github.supercodingspring.supercodingproject1st.config.security;
 
 import com.github.supercodingspring.supercodingproject1st.repository.token.Token;
-import com.github.supercodingspring.supercodingproject1st.repository.token.tokenJpaRepository;
+import com.github.supercodingspring.supercodingproject1st.repository.token.TokenJpaRepository;
 import io.jsonwebtoken.*;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
@@ -18,11 +18,13 @@ import org.springframework.stereotype.Component;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
 public class JwtTokenProvider {
-    private final tokenJpaRepository tokenJpaRepository;
+    private final TokenJpaRepository tokenJpaRepository;
+
     private static final Logger log = LoggerFactory.getLogger(JwtTokenProvider.class);
     @Value("${jwt.secret-key-source}")
     private String secretKeySource;
@@ -34,7 +36,8 @@ public class JwtTokenProvider {
                 .encodeToString(secretKeySource.getBytes());
     }
 
-    private long tokenValidTime = 1000L * 60 * 60; //토큰 유효시간 설정, 1000ms * 60 * 60 = 1시간
+    @Value("${TOKEN_VALID_TIME}")
+    private long tokenValidTime; //토큰 유효시간 설정, 1000ms * 60 * 60 = 1시간
 
     private final UserDetailsService userDetailsService;
 
@@ -44,26 +47,58 @@ public class JwtTokenProvider {
     }
 
     //토큰 유효성 검증
-
     public boolean validateToken(String jwtToken) {
-
         try {
             Claims claims = Jwts.parser() //jwt 파싱하기 위한 빌더 객체 생성.
                     .setSigningKey(this.secretKey) //jwt 검증 시 사용할 비밀키 설정, JWT에 서명된 키와 동일해야함.
                     .parseClaimsJws(jwtToken) //parameter로 받은 jwtToken을 파싱하고 서명을 검증함. 서명이 유효하지 않거나 토큰 형식이 올바르지 않으면 예외 발생.
                     .getBody(); // JWT의 페이로드 부분을 가져옴.
+
+            if(!isValidToken(jwtToken)) { //DB에 저장된 토큰의 유효성 검사
+                throw new JwtException("유효하지 않은 토큰입니다.");
+            }
+
             Date now = new Date(); // 현재 시간을 기준으로 토큰의 만료시간을 확인하기 위함.
             return claims.getExpiration() // 토큰의 만료시간을 Date 객체로 반환 받음
                     .after(now); // 토큰의 만료시간이 현재시간 이후인지 확인, 만료시간이 현재보다 이후라면 true를 반환
-        }catch (ExpiredJwtException e){
+        }catch (ExpiredJwtException e){ //토큰이 만료되었을 때
             log.error("만료된 토큰입니다.");
             return false;
         }catch (JwtException | IllegalArgumentException e){
-            log.error("유효하지 않은 토큰이 입력되었습니다.");
+            log.error(e.getMessage());
             return false;
         }
         catch (Exception e){
             return false;
+        }
+    }
+
+    public void saveTokenStatus(String jwtToken) {
+        Token token = Token.builder()
+                .token(jwtToken)
+                .isValid(true)
+                .build();
+
+        tokenJpaRepository.save(token);
+    }
+
+    public boolean isValidToken(String jwtToken) { //정상적으로 로그아웃 되어서 DB에 valid가 false인 경우
+        List<Token> tokenList = tokenJpaRepository.findAllByToken(jwtToken);
+        for (Token token : tokenList) {
+            if(Objects.equals(token.getToken(), jwtToken))
+                if(token.getIsValid() == false)
+                    return false;
+        }
+        return true;
+    }
+
+    public void invalidateToken(String jwtToken) {
+        List<Token> tokenList = tokenJpaRepository.findAllByToken(jwtToken);
+        for (Token token : tokenList) {
+            if(Objects.equals(token.getToken(), jwtToken)) {
+                token.setIsValid(false);
+                tokenJpaRepository.save(token);
+            }
         }
     }
 

@@ -1,6 +1,7 @@
 package com.github.supercodingspring.supercodingproject1st.service;
 
 import com.github.supercodingspring.supercodingproject1st.config.security.JwtTokenProvider;
+import com.github.supercodingspring.supercodingproject1st.repository.token.TokenJpaRepository;
 import com.github.supercodingspring.supercodingproject1st.repository.user.User;
 import com.github.supercodingspring.supercodingproject1st.repository.user.UserJpaRepository;
 import com.github.supercodingspring.supercodingproject1st.service.exception.NotAcceptException;
@@ -26,6 +27,7 @@ public class LoginService {
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
     private final UserJpaRepository userJpaRepository;
+    private final TokenJpaRepository tokenJpaRepository;
 
     public ResponseEntity<Map<String, String>> login(LoginRequest loginRequest, HttpServletResponse response) {
         String email = loginRequest.getEmail(); // 사용자가 입력한 email
@@ -48,6 +50,7 @@ public class LoginService {
             String token = jwtTokenProvider.createToken(email,user.getUserName()); // email과 사용자 이름을 넣은 토큰 생성
             response.setHeader("X-AUTH-TOKEN", token); //X-AUTH-TOKEN 이라는 헤더 이름으로 토큰을 넣어 설정
 
+            jwtTokenProvider.saveTokenStatus(token);
 
             responseBody.put("message","성공적으로 로그인하였습니다.");
             return ResponseEntity.ok(responseBody);

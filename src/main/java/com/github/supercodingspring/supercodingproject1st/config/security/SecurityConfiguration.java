@@ -27,12 +27,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfiguration {
     private final JwtTokenProvider jwtTokenProvider;
-
+    private final CustomerAccessDeniedHandler customerAccessDeniedHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(cors->
+                .cors(cors ->
                         cors.configurationSource(corsConfigurationSource())) //CORS 문제 해결
                 .headers(headers -> headers
                         .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
@@ -44,9 +44,12 @@ public class SecurityConfiguration {
                 .sessionManagement(sessionManagement -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
-                .authorizeHttpRequests(authorize->authorize
-                        .requestMatchers("/resources/static/**","/api/signup","/api/login").permitAll() //인가 설정 , signup, login 페이지는 누구에게나
-                        .requestMatchers("/api/posts","/api/logout").hasRole("USER") //인가 설정, 포스트와 로그아웃 요청은 USER에게만
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/resources/static/**", "/api/signup", "/api/login").permitAll() //인가 설정 , signup, login 페이지는 누구에게나
+                        .requestMatchers("/api/posts", "/api/logout").hasRole("USER") //인가 설정, 포스트와 로그아웃 요청은 USER에게만
+                ).exceptionHandling(exceptionHandler->exceptionHandler
+                        .accessDeniedHandler(new CustomerAccessDeniedHandler())
+                        .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
         //필터 순서를 설정하는데 UsernamePasswordAuthenticationFilter보다 앞에(before) JwtAuthenticationFilter를 적용하도록 설정

@@ -1,30 +1,33 @@
 package com.github.supercodingspring.supercodingproject1st.service;
 
+import com.github.supercodingspring.supercodingproject1st.config.security.JwtTokenProvider;
 import com.github.supercodingspring.supercodingproject1st.repository.post.Post;
 import com.github.supercodingspring.supercodingproject1st.repository.post.PostJpaRepository;
+import com.github.supercodingspring.supercodingproject1st.repository.token.TokenJpaRepository;
 import com.github.supercodingspring.supercodingproject1st.repository.user.UserJpaRepository;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class PostService {
+    private static final Logger log = LoggerFactory.getLogger(PostService.class);
     private final PostJpaRepository postJpaRepository;
     private final UserJpaRepository userJpaRepository;
+    private final TokenJpaRepository tokenJpaRepository;
+    private final JwtTokenProvider jwtTokenProvider;
 
     @Value("${jwt.secret-key-source}")
     private String secretKeySource;
@@ -58,10 +61,14 @@ public class PostService {
         return ResponseEntity.ok(responseBody);
     }
 
-    public ResponseEntity<Map<String, List<Post>>> getAllPosts() {
+    public ResponseEntity<Map<String, Object>> getAllPosts(HttpServletRequest request) {
+        String jwtToken = request.getHeader("X-AUTH-TOKEN");
+
         List<Post> postList =  postJpaRepository.findAll();
-        Map<String, List<Post>> responseBody = new HashMap<>();
+        Map<String, Object> responseBody = new HashMap<>();
+
         responseBody.put("posts", postList);
         return ResponseEntity.ok(responseBody);
+
     }
 }

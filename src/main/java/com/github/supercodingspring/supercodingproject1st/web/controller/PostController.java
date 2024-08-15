@@ -34,7 +34,7 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public ResponseEntity<Map<String, List<Post>>> getAllPosts(){
-        return postService.getAllPosts();
+    public ResponseEntity<Map<String, Object>> getAllPosts(HttpServletRequest request){
+        return postService.getAllPosts(request);
     }
 }
