@@ -46,7 +46,7 @@ public class SecurityConfiguration {
                 )
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/resources/static/**", "/api/signup", "/api/login").permitAll() //인가 설정 , signup, login 페이지는 누구에게나
-                        .requestMatchers("/api/posts", "/api/logout").hasRole("USER") //인가 설정, 포스트와 로그아웃 요청은 USER에게만
+                        .requestMatchers("/api/**").hasRole("USER") //인가 설정, 포스트와 로그아웃 요청은 USER에게만
                 ).exceptionHandling(exceptionHandler->exceptionHandler
                         .accessDeniedHandler(new CustomerAccessDeniedHandler())
                         .authenticationEntryPoint(new CustomAuthenticationEntryPoint())

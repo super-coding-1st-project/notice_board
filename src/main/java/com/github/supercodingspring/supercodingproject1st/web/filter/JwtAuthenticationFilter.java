@@ -20,7 +20,7 @@ import java.io.PrintWriter;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final JwtTokenProvider jwtTokenProvider;
 
-    @Override
+    @Override // 클라이언트 요청이 들어오면 필터를 제일 먼저 거침
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String jwtToken = jwtTokenProvider.resolveToken(request);
 
@@ -37,6 +37,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         else {
             log.error("토큰이 유효하지 않아 인증절차 진행 안함");
+            jwtTokenProvider.invalidateToken(jwtToken);
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
@@ -45,7 +46,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 out.print("{\"error\": \"유효하지 않은 토큰\"}");
                 out.flush();
             }
-            return;
         }
     }
 }

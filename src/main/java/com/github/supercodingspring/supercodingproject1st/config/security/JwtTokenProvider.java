@@ -54,7 +54,7 @@ public class JwtTokenProvider {
                     .parseClaimsJws(jwtToken) //parameter로 받은 jwtToken을 파싱하고 서명을 검증함. 서명이 유효하지 않거나 토큰 형식이 올바르지 않으면 예외 발생.
                     .getBody(); // JWT의 페이로드 부분을 가져옴.
 
-            if(!isValidToken(jwtToken)) { //DB에 저장된 토큰의 유효성 검사
+            if(isValidToken(jwtToken) == false) { //DB에 저장된 토큰의 유효성 검사
                 throw new JwtException("유효하지 않은 토큰입니다.");
             }
 

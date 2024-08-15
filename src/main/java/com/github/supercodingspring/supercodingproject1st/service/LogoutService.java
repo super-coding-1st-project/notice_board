@@ -25,7 +25,7 @@ public class LogoutService {
         String jwtToken = request.getHeader("X-AUTH-TOKEN"); //클라이언트가 요청한 헤더에서 X-AUTH-TOKEN을 가져와 변수에 저장
 
         if(jwtToken == null || !jwtTokenProvider.validateToken(jwtToken)){
-            responseBody.put("error", "Invalid JWT token");
+            responseBody.put("message", "유효하지 않은 토큰입니다.");
             return ResponseEntity.badRequest().body(responseBody);
         }
 
