@@ -30,19 +30,16 @@ public class SignController {
 
     @PostMapping("/signup")
     public ResponseEntity<Map<String, String>> signup(@RequestBody SignupRequest signupRequest) {
-        log.info("signup request: {}", signupRequest);
         return signupService.signUp(signupRequest);
     }
 
     @PostMapping("/login")
     public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
-        log.info("login request: {}", loginRequest);
         return loginService.login(loginRequest, response);
     }
 
     @PostMapping("/logout")
     public ResponseEntity<Map<String, String>> logout(@RequestBody LogoutRequest logoutRequest, HttpServletRequest request, HttpServletResponse response) {
-        log.info("Logout request received");
         return logoutService.logout(logoutRequest, request, response);
     }
 

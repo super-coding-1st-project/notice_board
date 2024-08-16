@@ -17,3 +17,14 @@ logging:
     org:
       hibernate:
         SQL: DEBUG
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+# spring data jpa 설정
+jpa:
+  open-in-view: false
+  properties:
+    dialect: org.hibernate.dialect.MySQLDialect

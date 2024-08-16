@@ -2,15 +2,12 @@ package com.github.supercodingspring.supercodingproject1st.service;
 
 import com.github.supercodingspring.supercodingproject1st.config.security.JwtTokenProvider;
 import com.github.supercodingspring.supercodingproject1st.repository.token.TokenJpaRepository;
-import com.github.supercodingspring.supercodingproject1st.repository.user.User;
+import com.github.supercodingspring.supercodingproject1st.repository.entity.User;
 import com.github.supercodingspring.supercodingproject1st.repository.user.UserJpaRepository;
 import com.github.supercodingspring.supercodingproject1st.service.exception.NotAcceptException;
-import com.github.supercodingspring.supercodingproject1st.service.exception.NotFoundException;
 import com.github.supercodingspring.supercodingproject1st.web.dto.LoginRequest;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.apache.tomcat.util.http.parser.Authorization;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -50,7 +47,6 @@ public class LoginService {
 
             String token = jwtTokenProvider.createToken(email,user.getUserName()); // email과 사용자 이름을 넣은 토큰 생성
             response.setHeader("Authorization", token); //X-AUTH-TOKEN 이라는 헤더 이름으로 토큰을 넣어 설정
-            System.out.println(response.getHeader("Authorization")+"인증 헤더@@@@@@@@@@@@@@@@@");
 
             jwtTokenProvider.saveTokenStatus(token);
 

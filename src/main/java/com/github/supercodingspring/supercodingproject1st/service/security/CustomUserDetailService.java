@@ -1,7 +1,7 @@
 package com.github.supercodingspring.supercodingproject1st.service.security;
 
 import com.github.supercodingspring.supercodingproject1st.repository.user.CustomUserDetails;
-import com.github.supercodingspring.supercodingproject1st.repository.user.User;
+import com.github.supercodingspring.supercodingproject1st.repository.entity.User;
 import com.github.supercodingspring.supercodingproject1st.repository.user.UserJpaRepository;
 import com.github.supercodingspring.supercodingproject1st.service.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -11,8 +11,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 @Service

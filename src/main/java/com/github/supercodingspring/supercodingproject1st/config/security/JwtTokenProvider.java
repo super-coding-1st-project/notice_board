@@ -1,6 +1,6 @@
 package com.github.supercodingspring.supercodingproject1st.config.security;
 
-import com.github.supercodingspring.supercodingproject1st.repository.token.Token;
+import com.github.supercodingspring.supercodingproject1st.repository.entity.Token;
 import com.github.supercodingspring.supercodingproject1st.repository.token.TokenJpaRepository;
 import io.jsonwebtoken.*;
 import jakarta.annotation.PostConstruct;
@@ -36,12 +36,12 @@ public class JwtTokenProvider {
                 .encodeToString(secretKeySource.getBytes());
     }
 
-    @Value("${TOKEN_VALID_TIME}")
+    @Value("${jwt.token-valid-time}")
     private long tokenValidTime; //토큰 유효시간 설정, 1000ms * 60 * 60 = 1시간
 
     private final UserDetailsService userDetailsService;
 
-    //클라이언트 요청에서 X-AUTH-TOKEN 헤더에 있는 값 가져오기
+    //클라이언트 요청에서 Authorization 헤더에 있는 값 가져오기
     public String resolveToken(HttpServletRequest request) {
         return request.getHeader("Authorization");
     }
