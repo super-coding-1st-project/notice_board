@@ -22,7 +22,7 @@ public class LogoutService {
     //프론트엔드에서 클라이언트의 로컬스토리지에 저장된 토큰을 삭제함으로써 로그아웃 기능 구현.
     public ResponseEntity<Map<String, String>> logout(LogoutRequest logoutRequest, HttpServletRequest request, HttpServletResponse response) {
         Map<String, String> responseBody = new HashMap<>();
-        String jwtToken = request.getHeader("X-AUTH-TOKEN"); //클라이언트가 요청한 헤더에서 X-AUTH-TOKEN을 가져와 변수에 저장
+        String jwtToken = request.getHeader("Authorization"); //클라이언트가 요청한 헤더에서 X-AUTH-TOKEN을 가져와 변수에 저장
 
         if(jwtToken == null || !jwtTokenProvider.validateToken(jwtToken)){
             responseBody.put("message", "유효하지 않은 토큰입니다.");

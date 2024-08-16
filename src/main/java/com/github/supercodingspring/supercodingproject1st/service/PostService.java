@@ -42,7 +42,7 @@ public class PostService {
     public ResponseEntity<Map<String, String>> savePost(Post post, HttpServletRequest request) {
 
         Map<String, String> responseBody = new HashMap<>();
-        String token = request.getHeader("X-AUTH-TOKEN");
+        String token = request.getHeader("Authorization");
 
         Claims claims = Jwts.parser()
                 .setSigningKey(secretKey).parseClaimsJws(token).getBody();
@@ -62,7 +62,7 @@ public class PostService {
     }
 
     public ResponseEntity<Map<String, Object>> getAllPosts(HttpServletRequest request) {
-        String jwtToken = request.getHeader("X-AUTH-TOKEN");
+        String jwtToken = request.getHeader("Authorization");
 
         List<Post> postList =  postJpaRepository.findAll();
         Map<String, Object> responseBody = new HashMap<>();

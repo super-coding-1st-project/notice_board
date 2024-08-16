@@ -52136,3 +52136,1005 @@ Caused by: org.springframework.security.access.AccessDeniedException: Access Den
 2024-08-15 22:10:07.306 [main] [34mINFO [0;39m [36mo.s.b.w.e.tomcat.TomcatWebServer[0;39m - Tomcat started on port 8080 (http) with context path '/'
 2024-08-15 22:10:07.311 [main] [34mINFO [0;39m [36mc.g.s.s.SuperCodingProject1stApplication[0;39m - Started SuperCodingProject1stApplication in 2.317 seconds (process running for 2.629)
 2024-08-15 22:11:04.035 [SpringApplicationShutdownHook] [34mINFO [0;39m [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-08-16 16:13:41.779 [main] [34mINFO [0;39m [36mc.g.s.s.SuperCodingProject1stApplication[0;39m - Starting SuperCodingProject1stApplication using Java 22.0.1 with PID 42973 (/Users/user/Java Project/superCodingProject1st/build/classes/java/main started by user in /Users/user/Java Project/superCodingProject1st)
+2024-08-16 16:13:41.780 [main] [34mINFO [0;39m [36mc.g.s.s.SuperCodingProject1stApplication[0;39m - No active profile set, falling back to 1 default profile: "default"
+2024-08-16 16:13:42.012 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-08-16 16:13:42.012 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-16 16:13:42.031 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Finished Spring Data repository scanning in 15 ms. Found 3 JPA repository interfaces.
+2024-08-16 16:13:42.120 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-08-16 16:13:42.120 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2024-08-16 16:13:42.127 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationExtensionSupport[0;39m - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.github.supercodingspring.supercodingproject1st.repository.post.PostJpaRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2024-08-16 16:13:42.127 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationExtensionSupport[0;39m - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.github.supercodingspring.supercodingproject1st.repository.token.TokenJpaRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2024-08-16 16:13:42.127 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationExtensionSupport[0;39m - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.github.supercodingspring.supercodingproject1st.repository.user.UserJpaRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2024-08-16 16:13:42.127 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Finished Spring Data repository scanning in 6 ms. Found 0 JDBC repository interfaces.
+2024-08-16 16:13:42.350 [main] [34mINFO [0;39m [36mo.s.b.w.e.tomcat.TomcatWebServer[0;39m - Tomcat initialized with port 8080 (http)
+2024-08-16 16:13:42.359 [main] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Initializing ProtocolHandler ["http-nio-8080"]
+2024-08-16 16:13:42.360 [main] [34mINFO [0;39m [36mo.a.catalina.core.StandardService[0;39m - Starting service [Tomcat]
+2024-08-16 16:13:42.360 [main] [34mINFO [0;39m [36mo.a.catalina.core.StandardEngine[0;39m - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-08-16 16:13:42.383 [main] [34mINFO [0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/][0;39m - Initializing Spring embedded WebApplicationContext
+2024-08-16 16:13:42.384 [main] [34mINFO [0;39m [36mo.s.b.w.s.c.ServletWebServerApplicationContext[0;39m - Root WebApplicationContext: initialization completed in 590 ms
+2024-08-16 16:13:42.436 [main] [34mINFO [0;39m [36mo.h.jpa.internal.util.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-16 16:13:42.467 [main] [34mINFO [0;39m [36morg.hibernate.Version[0;39m - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-16 16:13:42.483 [main] [34mINFO [0;39m [36mo.h.c.i.RegionFactoryInitiator[0;39m - HHH000026: Second-level cache disabled
+2024-08-16 16:13:42.657 [main] [34mINFO [0;39m [36mo.s.o.j.p.SpringPersistenceUnitInfo[0;39m - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-16 16:13:43.203 [main] [34mINFO [0;39m [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-16 16:13:43.204 [main] [34mINFO [0;39m [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-16 16:13:43.326 [main] [34mINFO [0;39m [36mo.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer[0;39m - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2024-08-16 16:13:43.390 [main] [31mWARN [0;39m [36mo.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration[0;39m - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-16 16:13:43.815 [main] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Starting ProtocolHandler ["http-nio-8080"]
+2024-08-16 16:13:43.824 [main] [34mINFO [0;39m [36mo.s.b.w.e.tomcat.TomcatWebServer[0;39m - Tomcat started on port 8080 (http) with context path '/'
+2024-08-16 16:13:43.829 [main] [34mINFO [0;39m [36mc.g.s.s.SuperCodingProject1stApplication[0;39m - Started SuperCodingProject1stApplication in 2.24 seconds (process running for 2.524)
+2024-08-16 16:14:59.521 [http-nio-8080-exec-1] [34mINFO [0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/][0;39m - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-16 16:14:59.522 [http-nio-8080-exec-1] [34mINFO [0;39m [36mo.s.web.servlet.DispatcherServlet[0;39m - Initializing Servlet 'dispatcherServlet'
+2024-08-16 16:14:59.524 [http-nio-8080-exec-1] [34mINFO [0;39m [36mo.s.web.servlet.DispatcherServlet[0;39m - Completed initialization in 2 ms
+2024-08-16 16:14:59.576 [http-nio-8080-exec-2] [34mINFO [0;39m [36mc.g.s.s.w.controller.SignController[0;39m - login request: LoginRequest(email=test@example.com, password=1234)
+2024-08-16 16:14:59.624 [http-nio-8080-exec-2] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:14:59.732 [http-nio-8080-exec-2] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:14:59.847 [http-nio-8080-exec-2] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* insert for
+        com.github.supercodingspring.supercodingproject1st.repository.token.Token */insert 
+    into
+        tokenState (valid, token) 
+    values
+        (?, ?)
+2024-08-16 16:15:00.664 [http-nio-8080-exec-4] [1;31mERROR[0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하지 않아 인증절차 진행 안함
+2024-08-16 16:15:00.685 [http-nio-8080-exec-4] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token is null
+2024-08-16 16:15:29.339 [http-nio-8080-exec-5] [34mINFO [0;39m [36mc.g.s.s.w.controller.SignController[0;39m - login request: LoginRequest(email=test@example.com, password=1234)
+2024-08-16 16:15:29.349 [http-nio-8080-exec-5] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:15:29.382 [http-nio-8080-exec-5] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:15:29.487 [http-nio-8080-exec-5] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* insert for
+        com.github.supercodingspring.supercodingproject1st.repository.token.Token */insert 
+    into
+        tokenState (valid, token) 
+    values
+        (?, ?)
+2024-08-16 16:15:30.328 [http-nio-8080-exec-6] [1;31mERROR[0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하지 않아 인증절차 진행 안함
+2024-08-16 16:15:30.330 [http-nio-8080-exec-6] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token is null
+2024-08-16 16:16:06.572 [http-nio-8080-exec-7] [34mINFO [0;39m [36mc.g.s.s.w.controller.SignController[0;39m - login request: LoginRequest(email=test@example.com, password=1234)
+2024-08-16 16:16:06.576 [http-nio-8080-exec-7] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:16:06.605 [http-nio-8080-exec-7] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:16:06.725 [http-nio-8080-exec-7] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* insert for
+        com.github.supercodingspring.supercodingproject1st.repository.token.Token */insert 
+    into
+        tokenState (valid, token) 
+    values
+        (?, ?)
+2024-08-16 16:16:07.208 [http-nio-8080-exec-9] [1;31mERROR[0;39m [36mc.g.s.s.c.security.JwtTokenProvider[0;39m - JWT strings must contain exactly 2 period characters. Found: 0
+2024-08-16 16:16:07.208 [http-nio-8080-exec-9] [1;31mERROR[0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하지 않아 인증절차 진행 안함
+2024-08-16 16:16:07.210 [http-nio-8080-exec-9] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:16:45.426 [http-nio-8080-exec-10] [34mINFO [0;39m [36mc.g.s.s.w.controller.SignController[0;39m - login request: LoginRequest(email=test@example.com, password=1234)
+2024-08-16 16:16:45.431 [http-nio-8080-exec-10] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:16:45.452 [http-nio-8080-exec-10] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:16:45.566 [http-nio-8080-exec-10] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* insert for
+        com.github.supercodingspring.supercodingproject1st.repository.token.Token */insert 
+    into
+        tokenState (valid, token) 
+    values
+        (?, ?)
+2024-08-16 16:17:03.281 [http-nio-8080-exec-2] [1;31mERROR[0;39m [36mc.g.s.s.c.security.JwtTokenProvider[0;39m - 만료된 토큰입니다.
+2024-08-16 16:17:03.282 [http-nio-8080-exec-2] [1;31mERROR[0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하지 않아 인증절차 진행 안함
+2024-08-16 16:17:03.283 [http-nio-8080-exec-2] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:17:03.331 [http-nio-8080-exec-2] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.id=?
+2024-08-16 16:17:03.336 [http-nio-8080-exec-2] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* update
+        for com.github.supercodingspring.supercodingproject1st.repository.token.Token */update tokenState 
+    set
+        valid=?,
+        token=? 
+    where
+        id=?
+2024-08-16 16:17:55.409 [http-nio-8080-exec-4] [1;31mERROR[0;39m [36mc.g.s.s.c.security.JwtTokenProvider[0;39m - 만료된 토큰입니다.
+2024-08-16 16:17:55.410 [http-nio-8080-exec-4] [1;31mERROR[0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하지 않아 인증절차 진행 안함
+2024-08-16 16:17:55.413 [http-nio-8080-exec-4] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:17:55.450 [http-nio-8080-exec-4] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.id=?
+2024-08-16 16:18:09.451 [http-nio-8080-exec-5] [1;31mERROR[0;39m [36mc.g.s.s.c.security.JwtTokenProvider[0;39m - Unable to read JSON value: �z��&�r#�$�3#Sb
+2024-08-16 16:18:09.453 [http-nio-8080-exec-5] [1;31mERROR[0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하지 않아 인증절차 진행 안함
+2024-08-16 16:18:09.456 [http-nio-8080-exec-5] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:18:24.400 [http-nio-8080-exec-6] [1;31mERROR[0;39m [36mc.g.s.s.c.security.JwtTokenProvider[0;39m - 만료된 토큰입니다.
+2024-08-16 16:18:24.400 [http-nio-8080-exec-6] [1;31mERROR[0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하지 않아 인증절차 진행 안함
+2024-08-16 16:18:24.402 [http-nio-8080-exec-6] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:18:24.444 [http-nio-8080-exec-6] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.id=?
+2024-08-16 16:18:27.735 [http-nio-8080-exec-7] [34mINFO [0;39m [36mc.g.s.s.w.controller.SignController[0;39m - login request: LoginRequest(email=test@example.com, password=1234)
+2024-08-16 16:18:27.738 [http-nio-8080-exec-7] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:18:27.759 [http-nio-8080-exec-7] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:18:27.875 [http-nio-8080-exec-7] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* insert for
+        com.github.supercodingspring.supercodingproject1st.repository.token.Token */insert 
+    into
+        tokenState (valid, token) 
+    values
+        (?, ?)
+2024-08-16 16:18:52.706 [http-nio-8080-exec-8] [34mINFO [0;39m [36mc.g.s.s.w.controller.SignController[0;39m - login request: LoginRequest(email=test@example.com, password=1234)
+2024-08-16 16:18:52.709 [http-nio-8080-exec-8] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:18:52.731 [http-nio-8080-exec-8] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:18:52.850 [http-nio-8080-exec-8] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* insert for
+        com.github.supercodingspring.supercodingproject1st.repository.token.Token */insert 
+    into
+        tokenState (valid, token) 
+    values
+        (?, ?)
+2024-08-16 16:19:22.743 [http-nio-8080-exec-9] [1;31mERROR[0;39m [36mc.g.s.s.c.security.JwtTokenProvider[0;39m - 만료된 토큰입니다.
+2024-08-16 16:19:22.744 [http-nio-8080-exec-9] [1;31mERROR[0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하지 않아 인증절차 진행 안함
+2024-08-16 16:19:22.748 [http-nio-8080-exec-9] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:19:22.784 [http-nio-8080-exec-9] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.id=?
+2024-08-16 16:19:22.785 [http-nio-8080-exec-9] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* update
+        for com.github.supercodingspring.supercodingproject1st.repository.token.Token */update tokenState 
+    set
+        valid=?,
+        token=? 
+    where
+        id=?
+2024-08-16 16:21:55.093 [http-nio-8080-exec-10] [34mINFO [0;39m [36mc.g.s.s.w.controller.SignController[0;39m - login request: LoginRequest(email=test@example.com, password=1234)
+2024-08-16 16:21:55.103 [http-nio-8080-exec-10] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:21:55.132 [http-nio-8080-exec-10] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:21:55.239 [http-nio-8080-exec-10] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* insert for
+        com.github.supercodingspring.supercodingproject1st.repository.token.Token */insert 
+    into
+        tokenState (valid, token) 
+    values
+        (?, ?)
+2024-08-16 16:21:55.818 [http-nio-8080-exec-2] [1;31mERROR[0;39m [36mc.g.s.s.c.security.JwtTokenProvider[0;39m - JWT strings must contain exactly 2 period characters. Found: 0
+2024-08-16 16:21:55.818 [http-nio-8080-exec-2] [1;31mERROR[0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하지 않아 인증절차 진행 안함
+2024-08-16 16:21:55.821 [http-nio-8080-exec-2] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:23:20.880 [SpringApplicationShutdownHook] [34mINFO [0;39m [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-08-16 16:23:22.866 [main] [34mINFO [0;39m [36mc.g.s.s.SuperCodingProject1stApplication[0;39m - Starting SuperCodingProject1stApplication using Java 22.0.1 with PID 43524 (/Users/user/Java Project/superCodingProject1st/build/classes/java/main started by user in /Users/user/Java Project/superCodingProject1st)
+2024-08-16 16:23:22.867 [main] [34mINFO [0;39m [36mc.g.s.s.SuperCodingProject1stApplication[0;39m - No active profile set, falling back to 1 default profile: "default"
+2024-08-16 16:23:23.097 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-08-16 16:23:23.097 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-16 16:23:23.113 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Finished Spring Data repository scanning in 13 ms. Found 3 JPA repository interfaces.
+2024-08-16 16:23:23.202 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-08-16 16:23:23.202 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2024-08-16 16:23:23.208 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationExtensionSupport[0;39m - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.github.supercodingspring.supercodingproject1st.repository.post.PostJpaRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2024-08-16 16:23:23.209 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationExtensionSupport[0;39m - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.github.supercodingspring.supercodingproject1st.repository.token.TokenJpaRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2024-08-16 16:23:23.209 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationExtensionSupport[0;39m - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.github.supercodingspring.supercodingproject1st.repository.user.UserJpaRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2024-08-16 16:23:23.209 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Finished Spring Data repository scanning in 6 ms. Found 0 JDBC repository interfaces.
+2024-08-16 16:23:23.415 [main] [34mINFO [0;39m [36mo.s.b.w.e.tomcat.TomcatWebServer[0;39m - Tomcat initialized with port 8080 (http)
+2024-08-16 16:23:23.420 [main] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Initializing ProtocolHandler ["http-nio-8080"]
+2024-08-16 16:23:23.420 [main] [34mINFO [0;39m [36mo.a.catalina.core.StandardService[0;39m - Starting service [Tomcat]
+2024-08-16 16:23:23.420 [main] [34mINFO [0;39m [36mo.a.catalina.core.StandardEngine[0;39m - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-08-16 16:23:23.440 [main] [34mINFO [0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/][0;39m - Initializing Spring embedded WebApplicationContext
+2024-08-16 16:23:23.440 [main] [34mINFO [0;39m [36mo.s.b.w.s.c.ServletWebServerApplicationContext[0;39m - Root WebApplicationContext: initialization completed in 560 ms
+2024-08-16 16:23:23.486 [main] [34mINFO [0;39m [36mo.h.jpa.internal.util.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-16 16:23:23.508 [main] [34mINFO [0;39m [36morg.hibernate.Version[0;39m - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-16 16:23:23.522 [main] [34mINFO [0;39m [36mo.h.c.i.RegionFactoryInitiator[0;39m - HHH000026: Second-level cache disabled
+2024-08-16 16:23:23.682 [main] [34mINFO [0;39m [36mo.s.o.j.p.SpringPersistenceUnitInfo[0;39m - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-16 16:23:24.175 [main] [34mINFO [0;39m [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-16 16:23:24.176 [main] [34mINFO [0;39m [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-16 16:23:24.311 [main] [34mINFO [0;39m [36mo.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer[0;39m - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2024-08-16 16:23:24.375 [main] [31mWARN [0;39m [36mo.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration[0;39m - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-16 16:23:24.821 [main] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Starting ProtocolHandler ["http-nio-8080"]
+2024-08-16 16:23:24.829 [main] [34mINFO [0;39m [36mo.s.b.w.e.tomcat.TomcatWebServer[0;39m - Tomcat started on port 8080 (http) with context path '/'
+2024-08-16 16:23:24.835 [main] [34mINFO [0;39m [36mc.g.s.s.SuperCodingProject1stApplication[0;39m - Started SuperCodingProject1stApplication in 2.133 seconds (process running for 2.405)
+2024-08-16 16:23:33.332 [http-nio-8080-exec-1] [34mINFO [0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/][0;39m - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-16 16:23:33.333 [http-nio-8080-exec-1] [34mINFO [0;39m [36mo.s.web.servlet.DispatcherServlet[0;39m - Initializing Servlet 'dispatcherServlet'
+2024-08-16 16:23:33.334 [http-nio-8080-exec-1] [34mINFO [0;39m [36mo.s.web.servlet.DispatcherServlet[0;39m - Completed initialization in 1 ms
+2024-08-16 16:23:33.376 [http-nio-8080-exec-1] [34mINFO [0;39m [36mc.g.s.s.w.controller.SignController[0;39m - login request: LoginRequest(email=test@example.com, password=1234)
+2024-08-16 16:23:33.424 [http-nio-8080-exec-1] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:23:33.531 [http-nio-8080-exec-1] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:23:33.648 [http-nio-8080-exec-1] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* insert for
+        com.github.supercodingspring.supercodingproject1st.repository.token.Token */insert 
+    into
+        tokenState (valid, token) 
+    values
+        (?, ?)
+2024-08-16 16:23:39.671 [http-nio-8080-exec-2] [1;31mERROR[0;39m [36mc.g.s.s.c.security.JwtTokenProvider[0;39m - JWT strings must contain exactly 2 period characters. Found: 0
+2024-08-16 16:23:39.672 [http-nio-8080-exec-2] [1;31mERROR[0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하지 않아 인증절차 진행 안함
+2024-08-16 16:23:39.701 [http-nio-8080-exec-2] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:24:11.023 [http-nio-8080-exec-3] [34mINFO [0;39m [36mc.g.s.s.w.controller.SignController[0;39m - login request: LoginRequest(email=test@example.com, password=1234)
+2024-08-16 16:24:11.032 [http-nio-8080-exec-3] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:24:11.066 [http-nio-8080-exec-3] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:24:11.176 [http-nio-8080-exec-3] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* insert for
+        com.github.supercodingspring.supercodingproject1st.repository.token.Token */insert 
+    into
+        tokenState (valid, token) 
+    values
+        (?, ?)
+2024-08-16 16:24:11.996 [http-nio-8080-exec-4] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:24:12.011 [http-nio-8080-exec-4] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:24:12.022 [http-nio-8080-exec-4] [34mINFO [0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하여 인증 절차 진행
+2024-08-16 16:24:12.041 [http-nio-8080-exec-4] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        p1_0.id,
+        p1_0.author,
+        p1_0.content,
+        p1_0.created_at,
+        p1_0.title 
+    from
+        post p1_0
+2024-08-16 16:24:12.064 [http-nio-8080-exec-5] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:24:12.076 [http-nio-8080-exec-5] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:24:12.101 [http-nio-8080-exec-5] [34mINFO [0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하여 인증 절차 진행
+2024-08-16 16:24:12.110 [http-nio-8080-exec-5] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        p1_0.id,
+        p1_0.author,
+        p1_0.content,
+        p1_0.created_at,
+        p1_0.title 
+    from
+        post p1_0
+2024-08-16 16:24:18.292 [http-nio-8080-exec-7] [34mINFO [0;39m [36mc.g.s.s.w.controller.SignController[0;39m - login request: LoginRequest(email=test@example.com, password=1234)
+2024-08-16 16:24:18.296 [http-nio-8080-exec-7] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:24:18.316 [http-nio-8080-exec-7] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:24:18.434 [http-nio-8080-exec-7] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* insert for
+        com.github.supercodingspring.supercodingproject1st.repository.token.Token */insert 
+    into
+        tokenState (valid, token) 
+    values
+        (?, ?)
+2024-08-16 16:24:25.538 [http-nio-8080-exec-8] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:24:25.564 [http-nio-8080-exec-8] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:24:25.580 [http-nio-8080-exec-8] [34mINFO [0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하여 인증 절차 진행
+2024-08-16 16:24:25.596 [http-nio-8080-exec-8] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        p1_0.id,
+        p1_0.author,
+        p1_0.content,
+        p1_0.created_at,
+        p1_0.title 
+    from
+        post p1_0
+2024-08-16 16:24:39.118 [http-nio-8080-exec-9] [1;31mERROR[0;39m [36mc.g.s.s.c.security.JwtTokenProvider[0;39m - 만료된 토큰입니다.
+2024-08-16 16:24:39.120 [http-nio-8080-exec-9] [1;31mERROR[0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하지 않아 인증절차 진행 안함
+2024-08-16 16:24:39.122 [http-nio-8080-exec-9] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:24:39.162 [http-nio-8080-exec-9] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.id=?
+2024-08-16 16:24:39.170 [http-nio-8080-exec-9] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* update
+        for com.github.supercodingspring.supercodingproject1st.repository.token.Token */update tokenState 
+    set
+        valid=?,
+        token=? 
+    where
+        id=?
+2024-08-16 16:24:51.213 [http-nio-8080-exec-1] [1;31mERROR[0;39m [36mc.g.s.s.c.security.JwtTokenProvider[0;39m - 만료된 토큰입니다.
+2024-08-16 16:24:51.214 [http-nio-8080-exec-1] [1;31mERROR[0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하지 않아 인증절차 진행 안함
+2024-08-16 16:24:51.218 [http-nio-8080-exec-1] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:24:51.263 [http-nio-8080-exec-1] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.id=?
+2024-08-16 16:24:51.265 [http-nio-8080-exec-1] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* update
+        for com.github.supercodingspring.supercodingproject1st.repository.token.Token */update tokenState 
+    set
+        valid=?,
+        token=? 
+    where
+        id=?
+2024-08-16 16:24:51.305 [http-nio-8080-exec-2] [1;31mERROR[0;39m [36mc.g.s.s.c.security.JwtTokenProvider[0;39m - 만료된 토큰입니다.
+2024-08-16 16:24:51.306 [http-nio-8080-exec-2] [1;31mERROR[0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하지 않아 인증절차 진행 안함
+2024-08-16 16:24:51.307 [http-nio-8080-exec-2] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:24:51.343 [http-nio-8080-exec-2] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.id=?
+2024-08-16 16:24:51.349 [http-nio-8080-exec-3] [1;31mERROR[0;39m [36mc.g.s.s.c.security.JwtTokenProvider[0;39m - 만료된 토큰입니다.
+2024-08-16 16:24:51.349 [http-nio-8080-exec-3] [1;31mERROR[0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하지 않아 인증절차 진행 안함
+2024-08-16 16:24:51.351 [http-nio-8080-exec-3] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:24:51.377 [http-nio-8080-exec-3] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.id=?
+2024-08-16 16:25:50.846 [http-nio-8080-exec-5] [1;31mERROR[0;39m [36mc.g.s.s.c.security.JwtTokenProvider[0;39m - 만료된 토큰입니다.
+2024-08-16 16:25:50.848 [http-nio-8080-exec-5] [1;31mERROR[0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하지 않아 인증절차 진행 안함
+2024-08-16 16:25:50.856 [http-nio-8080-exec-5] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:25:50.896 [http-nio-8080-exec-5] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.id=?
+2024-08-16 16:26:12.859 [SpringApplicationShutdownHook] [34mINFO [0;39m [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-08-16 16:26:14.301 [main] [34mINFO [0;39m [36mc.g.s.s.SuperCodingProject1stApplication[0;39m - Starting SuperCodingProject1stApplication using Java 22.0.1 with PID 43642 (/Users/user/Java Project/superCodingProject1st/build/classes/java/main started by user in /Users/user/Java Project/superCodingProject1st)
+2024-08-16 16:26:14.301 [main] [34mINFO [0;39m [36mc.g.s.s.SuperCodingProject1stApplication[0;39m - No active profile set, falling back to 1 default profile: "default"
+2024-08-16 16:26:14.515 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-08-16 16:26:14.515 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-08-16 16:26:14.534 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Finished Spring Data repository scanning in 13 ms. Found 3 JPA repository interfaces.
+2024-08-16 16:26:14.618 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Multiple Spring Data modules found, entering strict repository configuration mode
+2024-08-16 16:26:14.618 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Bootstrapping Spring Data JDBC repositories in DEFAULT mode.
+2024-08-16 16:26:14.625 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationExtensionSupport[0;39m - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.github.supercodingspring.supercodingproject1st.repository.post.PostJpaRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2024-08-16 16:26:14.625 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationExtensionSupport[0;39m - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.github.supercodingspring.supercodingproject1st.repository.token.TokenJpaRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2024-08-16 16:26:14.625 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationExtensionSupport[0;39m - Spring Data JDBC - Could not safely identify store assignment for repository candidate interface com.github.supercodingspring.supercodingproject1st.repository.user.UserJpaRepository; If you want this repository to be a JDBC repository, consider annotating your entities with one of these annotations: org.springframework.data.relational.core.mapping.Table.
+2024-08-16 16:26:14.625 [main] [34mINFO [0;39m [36mo.s.d.r.c.RepositoryConfigurationDelegate[0;39m - Finished Spring Data repository scanning in 6 ms. Found 0 JDBC repository interfaces.
+2024-08-16 16:26:14.831 [main] [34mINFO [0;39m [36mo.s.b.w.e.tomcat.TomcatWebServer[0;39m - Tomcat initialized with port 8080 (http)
+2024-08-16 16:26:14.835 [main] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Initializing ProtocolHandler ["http-nio-8080"]
+2024-08-16 16:26:14.836 [main] [34mINFO [0;39m [36mo.a.catalina.core.StandardService[0;39m - Starting service [Tomcat]
+2024-08-16 16:26:14.836 [main] [34mINFO [0;39m [36mo.a.catalina.core.StandardEngine[0;39m - Starting Servlet engine: [Apache Tomcat/10.1.26]
+2024-08-16 16:26:14.856 [main] [34mINFO [0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/][0;39m - Initializing Spring embedded WebApplicationContext
+2024-08-16 16:26:14.856 [main] [34mINFO [0;39m [36mo.s.b.w.s.c.ServletWebServerApplicationContext[0;39m - Root WebApplicationContext: initialization completed in 542 ms
+2024-08-16 16:26:14.903 [main] [34mINFO [0;39m [36mo.h.jpa.internal.util.LogHelper[0;39m - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-08-16 16:26:14.926 [main] [34mINFO [0;39m [36morg.hibernate.Version[0;39m - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-08-16 16:26:14.938 [main] [34mINFO [0;39m [36mo.h.c.i.RegionFactoryInitiator[0;39m - HHH000026: Second-level cache disabled
+2024-08-16 16:26:15.089 [main] [34mINFO [0;39m [36mo.s.o.j.p.SpringPersistenceUnitInfo[0;39m - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-08-16 16:26:15.587 [main] [34mINFO [0;39m [36mo.h.e.t.j.p.i.JtaPlatformInitiator[0;39m - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-08-16 16:26:15.589 [main] [34mINFO [0;39m [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-08-16 16:26:15.712 [main] [34mINFO [0;39m [36mo.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer[0;39m - Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailService
+2024-08-16 16:26:15.774 [main] [31mWARN [0;39m [36mo.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration[0;39m - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-08-16 16:26:16.213 [main] [34mINFO [0;39m [36mo.a.coyote.http11.Http11NioProtocol[0;39m - Starting ProtocolHandler ["http-nio-8080"]
+2024-08-16 16:26:16.222 [main] [34mINFO [0;39m [36mo.s.b.w.e.tomcat.TomcatWebServer[0;39m - Tomcat started on port 8080 (http) with context path '/'
+2024-08-16 16:26:16.228 [main] [34mINFO [0;39m [36mc.g.s.s.SuperCodingProject1stApplication[0;39m - Started SuperCodingProject1stApplication in 2.093 seconds (process running for 2.367)
+2024-08-16 16:26:18.671 [http-nio-8080-exec-1] [34mINFO [0;39m [36mo.a.c.c.C.[Tomcat].[localhost].[/][0;39m - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-08-16 16:26:18.671 [http-nio-8080-exec-1] [34mINFO [0;39m [36mo.s.web.servlet.DispatcherServlet[0;39m - Initializing Servlet 'dispatcherServlet'
+2024-08-16 16:26:18.672 [http-nio-8080-exec-1] [34mINFO [0;39m [36mo.s.web.servlet.DispatcherServlet[0;39m - Completed initialization in 1 ms
+2024-08-16 16:26:18.714 [http-nio-8080-exec-1] [34mINFO [0;39m [36mc.g.s.s.w.controller.SignController[0;39m - login request: LoginRequest(email=test@example.com, password=1234)
+2024-08-16 16:26:18.757 [http-nio-8080-exec-1] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:26:18.862 [http-nio-8080-exec-1] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:26:18.975 [http-nio-8080-exec-1] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* insert for
+        com.github.supercodingspring.supercodingproject1st.repository.token.Token */insert 
+    into
+        tokenState (valid, token) 
+    values
+        (?, ?)
+2024-08-16 16:26:24.516 [http-nio-8080-exec-3] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:26:24.534 [http-nio-8080-exec-3] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:26:24.547 [http-nio-8080-exec-3] [34mINFO [0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하여 인증 절차 진행
+2024-08-16 16:26:24.564 [http-nio-8080-exec-3] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        p1_0.id,
+        p1_0.author,
+        p1_0.content,
+        p1_0.created_at,
+        p1_0.title 
+    from
+        post p1_0
+2024-08-16 16:26:28.150 [http-nio-8080-exec-4] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:26:28.183 [http-nio-8080-exec-4] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:26:28.202 [http-nio-8080-exec-4] [34mINFO [0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하여 인증 절차 진행
+2024-08-16 16:26:28.224 [http-nio-8080-exec-4] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* insert for
+        com.github.supercodingspring.supercodingproject1st.repository.post.Post */insert 
+    into
+        post (author, content, created_at, title) 
+    values
+        (?, ?, ?, ?)
+2024-08-16 16:26:31.719 [http-nio-8080-exec-5] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:26:31.742 [http-nio-8080-exec-5] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:26:31.758 [http-nio-8080-exec-5] [34mINFO [0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하여 인증 절차 진행
+2024-08-16 16:26:31.772 [http-nio-8080-exec-5] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        p1_0.id,
+        p1_0.author,
+        p1_0.content,
+        p1_0.created_at,
+        p1_0.title 
+    from
+        post p1_0
+2024-08-16 16:26:37.935 [http-nio-8080-exec-6] [34mINFO [0;39m [36mc.g.s.s.w.controller.SignController[0;39m - login request: LoginRequest(email=test@example.com, password=1234)
+2024-08-16 16:26:37.939 [http-nio-8080-exec-6] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:26:37.960 [http-nio-8080-exec-6] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:26:38.075 [http-nio-8080-exec-6] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* insert for
+        com.github.supercodingspring.supercodingproject1st.repository.token.Token */insert 
+    into
+        tokenState (valid, token) 
+    values
+        (?, ?)
+2024-08-16 16:26:38.655 [http-nio-8080-exec-7] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:26:38.678 [http-nio-8080-exec-7] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:26:38.693 [http-nio-8080-exec-7] [34mINFO [0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하여 인증 절차 진행
+2024-08-16 16:26:38.712 [http-nio-8080-exec-7] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        p1_0.id,
+        p1_0.author,
+        p1_0.content,
+        p1_0.created_at,
+        p1_0.title 
+    from
+        post p1_0
+2024-08-16 16:26:38.722 [http-nio-8080-exec-8] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        t1_0.id,
+        t1_0.valid,
+        t1_0.token 
+    from
+        tokenState t1_0 
+    where
+        t1_0.token=?
+2024-08-16 16:26:38.737 [http-nio-8080-exec-8] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        u1_0.user_id,
+        u1_0.created_at,
+        u1_0.email,
+        u1_0.password,
+        u1_0.roles,
+        u1_0.user_name 
+    from
+        user u1_0 
+    where
+        u1_0.email=?
+2024-08-16 16:26:38.748 [http-nio-8080-exec-8] [34mINFO [0;39m [36mc.g.s.s.w.f.JwtAuthenticationFilter[0;39m - 토큰이 유효하여 인증 절차 진행
+2024-08-16 16:26:38.760 [http-nio-8080-exec-8] [39mDEBUG[0;39m [36morg.hibernate.SQL[0;39m - 
+    /* <criteria> */ select
+        p1_0.id,
+        p1_0.author,
+        p1_0.content,
+        p1_0.created_at,
+        p1_0.title 
+    from
+        post p1_0
+2024-08-16 16:26:51.984 [SpringApplicationShutdownHook] [34mINFO [0;39m [36mo.s.o.j.LocalContainerEntityManagerFactoryBean[0;39m - Closing JPA EntityManagerFactory for persistence unit 'default'

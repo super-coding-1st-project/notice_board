@@ -68,7 +68,7 @@ public class SecurityConfiguration {
         configuration.setAllowedOrigins(List.of("http://localhost:63342","http://localhost:3000"));
 
         configuration.setAllowCredentials(true); // token 주고 받을때 필요
-        configuration.addExposedHeader("X-AUTH-TOKEN"); //token
+        configuration.addExposedHeader("Authorization"); //token
 
         configuration.addAllowedHeader("*");
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
