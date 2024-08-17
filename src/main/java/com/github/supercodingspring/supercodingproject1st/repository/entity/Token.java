@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @ToString
-@Table(name = "tokenState")
+@Table(name = "tokenStatus")
 public class Token {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -19,6 +19,6 @@ public class Token {
     @Column(name = "token")
     private String token;
 
-    @Column(name = "valid")
+    @Column(name = "isValid")
     private Boolean isValid;
 }

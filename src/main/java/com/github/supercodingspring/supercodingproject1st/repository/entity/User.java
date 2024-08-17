@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -12,10 +13,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @ToString
-@Table(name = "user")
+@Table(name = "users")
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "id")
     private Integer userId;
 
     @Column(name = "user_name")
@@ -30,6 +31,6 @@ public class User {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "roles")
-    private String roles;
+    @OneToMany(mappedBy = "user")
+    private List<UserPrincipalRoles> userPrincipalRoles;
 }

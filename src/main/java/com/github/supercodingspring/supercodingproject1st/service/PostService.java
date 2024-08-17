@@ -2,9 +2,13 @@ package com.github.supercodingspring.supercodingproject1st.service;
 
 import com.github.supercodingspring.supercodingproject1st.config.security.JwtTokenProvider;
 import com.github.supercodingspring.supercodingproject1st.repository.entity.Post;
+import com.github.supercodingspring.supercodingproject1st.repository.entity.User;
 import com.github.supercodingspring.supercodingproject1st.repository.post.PostRepository;
-import com.github.supercodingspring.supercodingproject1st.repository.token.TokenJpaRepository;
+import com.github.supercodingspring.supercodingproject1st.repository.token.TokenRepository;
 import com.github.supercodingspring.supercodingproject1st.repository.user.UserRepository;
+import com.github.supercodingspring.supercodingproject1st.service.exception.NotFoundException;
+import com.github.supercodingspring.supercodingproject1st.service.mapper.PostMapper;
+import com.github.supercodingspring.supercodingproject1st.web.dto.PostDto;
 import com.github.supercodingspring.supercodingproject1st.web.dto.PostRequest;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -28,7 +32,7 @@ public class PostService {
     private static final Logger log = LoggerFactory.getLogger(PostService.class);
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-    private final TokenJpaRepository tokenJpaRepository;
+    private final TokenRepository tokenRepository;
     private final JwtTokenProvider jwtTokenProvider;
 
     @Value("${jwt.secret-key-source}")
@@ -43,7 +47,7 @@ public class PostService {
 
     public ResponseEntity<Map<String, Object>> getAllPosts(HttpServletRequest request) {
 
-        List<Post> postList =  postRepository.findAll();
+        List<PostDto> postList =  postRepository.findAll().stream().map(PostMapper.INSTANCE::PosttoPostDto).toList();
         Map<String, Object> responseBody = new HashMap<>();
 
         responseBody.put("posts", postList);
@@ -61,13 +65,16 @@ public class PostService {
 
         String userName = claims.get("user_name").toString(); //파싱한 토큰에서 user_name을 가진 value를 가져와 userName 변수에 저장
 
+        User user = userRepository.findUserByUserNameFetchJoin(userName) //토큰에서 가져온 userName으로 repository에서 user 객체 탐색
+                .orElseThrow(()->new NotFoundException("User not found"));
+
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         Post savePost = Post.builder() //빌더 패턴 사용
                 .title(post.getTitle()) //사용자가 입력한 제목
                 .content(post.getContent()) //사용자가 입력한 내용
                 .createdAt(LocalDateTime.now().format(formatter)) //작성일시를 현재, 위의 formatter 형식으로
-                .author(userName) //토큰을 파싱해서 가져온 userName
+                .user(user) //토큰을 파싱해서 가져온 userName
                 .build();
 
         postRepository.save(savePost); //JPA를 이용하여 DB에 저장
@@ -75,10 +82,10 @@ public class PostService {
         return ResponseEntity.ok(responseBody);
     }
 
-    public ResponseEntity<Post> getPostById(Long id) {
+    public ResponseEntity<PostDto> getPostById(Long id) {
         Optional<Post> post = postRepository.findById(id);
-        return post.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+        PostDto postDto = PostMapper.INSTANCE.PosttoPostDto(post.get());
+        return ResponseEntity.ok(postDto);
     }
 
     public ResponseEntity<Map<String,String>> updatePost(Long id, PostRequest updatedPostRequest) {
@@ -114,5 +121,13 @@ public class PostService {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
             // 404 Not Found
         }
+    }
+
+    public ResponseEntity<Map<String, Object>> getAllPostsByEmail(String email, HttpServletRequest request) {
+        Map<String, Object> responseBody = new HashMap<>();
+        List<Post> posts = postRepository.findAllByUser_Email(email);
+        List<PostDto> postDto = posts.stream().map(PostMapper.INSTANCE::PosttoPostDto).toList();
+        responseBody.put("posts", postDto);
+        return ResponseEntity.ok(responseBody);
     }
 }

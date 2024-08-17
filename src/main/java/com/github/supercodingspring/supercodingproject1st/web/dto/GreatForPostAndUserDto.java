@@ -1,6 +1,6 @@
 package com.github.supercodingspring.supercodingproject1st.web.dto;
 
-import com.example.board1.entity.Great;
+
 import lombok.*;
 
 import java.util.List;

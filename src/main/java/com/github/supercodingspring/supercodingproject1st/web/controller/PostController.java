@@ -2,6 +2,7 @@ package com.github.supercodingspring.supercodingproject1st.web.controller;
 
 import com.github.supercodingspring.supercodingproject1st.repository.entity.Post;
 import com.github.supercodingspring.supercodingproject1st.service.PostService;
+import com.github.supercodingspring.supercodingproject1st.web.dto.PostDto;
 import com.github.supercodingspring.supercodingproject1st.web.dto.PostRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -48,7 +49,7 @@ public class PostController {
 
     // TODO 게시글 ID 검색 (id 검색. USER ID 아님.  + User Id 가 아니라 게시글 ID 라 본다면 틀린부분은 아니라고 보임. )
     @GetMapping("/{id}")
-    public ResponseEntity<Post> getPostById(@PathVariable Long id){
+    public ResponseEntity<PostDto> getPostById(@PathVariable Long id){
         log.info("getPostById request received");
         return postService.getPostById(id);
     }
@@ -63,5 +64,11 @@ public class PostController {
     public ResponseEntity<Map<String, String>> deletePost(@PathVariable Long id){
         log.info("deletePost request received");
         return postService.deletePost(id);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Map<String, Object>> searchPosts(@RequestParam("author_email") String email, HttpServletRequest request){
+        log.info("searchPosts request received");
+        return postService.getAllPostsByEmail(email,request);
     }
 }

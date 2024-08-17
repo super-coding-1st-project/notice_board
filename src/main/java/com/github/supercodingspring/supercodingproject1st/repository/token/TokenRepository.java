@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TokenJpaRepository extends JpaRepository<Token, Integer> {
+public interface TokenRepository extends JpaRepository<Token, Integer> {
     List<Token> findAllByToken(String token);
 }

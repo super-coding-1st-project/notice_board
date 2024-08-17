@@ -1,7 +1,7 @@
 package com.github.supercodingspring.supercodingproject1st.config.security;
 
 import com.github.supercodingspring.supercodingproject1st.repository.entity.Token;
-import com.github.supercodingspring.supercodingproject1st.repository.token.TokenJpaRepository;
+import com.github.supercodingspring.supercodingproject1st.repository.token.TokenRepository;
 import io.jsonwebtoken.*;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,7 +23,7 @@ import java.util.Objects;
 @Component
 @RequiredArgsConstructor
 public class JwtTokenProvider {
-    private final TokenJpaRepository tokenJpaRepository;
+    private final TokenRepository tokenRepository;
 
     private static final Logger log = LoggerFactory.getLogger(JwtTokenProvider.class);
     @Value("${jwt.secret-key-source}")
@@ -79,11 +79,11 @@ public class JwtTokenProvider {
                 .isValid(true)
                 .build();
 
-        tokenJpaRepository.save(token);
+        tokenRepository.save(token);
     }
 
     public boolean isValidToken(String jwtToken) { //정상적으로 로그아웃 되어서 DB에 valid가 false인 경우
-        List<Token> tokenList = tokenJpaRepository.findAllByToken(jwtToken);
+        List<Token> tokenList = tokenRepository.findAllByToken(jwtToken);
         for (Token token : tokenList) {
             if(Objects.equals(token.getToken(), jwtToken))
                 if(token.getIsValid() == false)
@@ -93,11 +93,11 @@ public class JwtTokenProvider {
     }
 
     public void invalidateToken(String jwtToken) {
-        List<Token> tokenList = tokenJpaRepository.findAllByToken(jwtToken);
+        List<Token> tokenList = tokenRepository.findAllByToken(jwtToken);
         for (Token token : tokenList) {
             if(Objects.equals(token.getToken(), jwtToken)) {
                 token.setIsValid(false);
-                tokenJpaRepository.save(token);
+                tokenRepository.save(token);
             }
         }
     }

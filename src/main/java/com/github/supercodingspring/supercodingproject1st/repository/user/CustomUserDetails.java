@@ -1,5 +1,6 @@
 package com.github.supercodingspring.supercodingproject1st.repository.user;
 
+import com.github.supercodingspring.supercodingproject1st.repository.entity.Role;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
