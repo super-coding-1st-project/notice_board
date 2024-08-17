@@ -1,7 +1,7 @@
 package com.github.supercodingspring.supercodingproject1st.service;
 
 import com.github.supercodingspring.supercodingproject1st.repository.entity.User;
-import com.github.supercodingspring.supercodingproject1st.repository.user.UserJpaRepository;
+import com.github.supercodingspring.supercodingproject1st.repository.user.UserRepository;
 import com.github.supercodingspring.supercodingproject1st.web.dto.SignupRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +16,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class SignupService {
-    private final UserJpaRepository userJpaRepository;
+    private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional(transactionManager = "tmJpa")
@@ -24,7 +24,7 @@ public class SignupService {
         String email = signupRequest.getEmail(); // 사용자가 입력한 email
         String password = signupRequest.getPassword(); // 사용자가 입력한 비밀번호
 
-        Integer userSerialNum = userJpaRepository.findAll().size() + 1; //현재 저장된 유저 갯수 + 1
+        Integer userSerialNum = userRepository.findAll().size() + 1; //현재 저장된 유저 갯수 + 1
 
         Map<String,String > responseBody = new HashMap<>(); // 응답 객체 생성
 
@@ -33,7 +33,7 @@ public class SignupService {
             return ResponseEntity.badRequest().body(responseBody); // badRequest 응답으로 보냄
         }
 
-        if(userJpaRepository.findByEmail(email) != null){  //user 테이블에 email이 존재하는지 확인
+        if(userRepository.findByEmail(email) != null){  //user 테이블에 email이 존재하는지 확인
            responseBody.put("message","이미 존재하는 이메일입니다.");
            return ResponseEntity.badRequest().body(responseBody); // badRequest 응답으로 보냄
         }
@@ -46,7 +46,7 @@ public class SignupService {
                 .roles("ROLE_USER") // 권한을 위해 String roles 변수에 지정, 추후 Role 객체 등으로 리팩토링 예정
                 .build();
         try {
-            userJpaRepository.save(user); // JpaRepository를 통해 user 테이블에 저장
+            userRepository.save(user); // JpaRepository를 통해 user 테이블에 저장
             responseBody.put("message", "회원가입이 완료되었습니다.");
             return ResponseEntity.ok(responseBody); // 성공적으로 회원가입 되면
         } catch (Exception e) {

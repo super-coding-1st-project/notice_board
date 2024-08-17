@@ -4,7 +4,7 @@ import com.github.supercodingspring.supercodingproject1st.config.security.JwtTok
 import com.github.supercodingspring.supercodingproject1st.repository.entity.Post;
 import com.github.supercodingspring.supercodingproject1st.repository.post.PostRepository;
 import com.github.supercodingspring.supercodingproject1st.repository.token.TokenJpaRepository;
-import com.github.supercodingspring.supercodingproject1st.repository.user.UserJpaRepository;
+import com.github.supercodingspring.supercodingproject1st.repository.user.UserRepository;
 import com.github.supercodingspring.supercodingproject1st.web.dto.PostRequest;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -27,7 +27,7 @@ import java.util.*;
 public class PostService {
     private static final Logger log = LoggerFactory.getLogger(PostService.class);
     private final PostRepository postRepository;
-    private final UserJpaRepository userJpaRepository;
+    private final UserRepository userRepository;
     private final TokenJpaRepository tokenJpaRepository;
     private final JwtTokenProvider jwtTokenProvider;
 

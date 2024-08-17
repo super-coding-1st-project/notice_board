@@ -3,7 +3,7 @@ package com.github.supercodingspring.supercodingproject1st.service;
 import com.github.supercodingspring.supercodingproject1st.config.security.JwtTokenProvider;
 import com.github.supercodingspring.supercodingproject1st.repository.token.TokenJpaRepository;
 import com.github.supercodingspring.supercodingproject1st.repository.entity.User;
-import com.github.supercodingspring.supercodingproject1st.repository.user.UserJpaRepository;
+import com.github.supercodingspring.supercodingproject1st.repository.user.UserRepository;
 import com.github.supercodingspring.supercodingproject1st.service.exception.NotAcceptException;
 import com.github.supercodingspring.supercodingproject1st.web.dto.LoginRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -24,7 +24,7 @@ import java.util.Map;
 public class LoginService {
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
-    private final UserJpaRepository userJpaRepository;
+    private final UserRepository userRepository;
     private final TokenJpaRepository tokenJpaRepository;
 
     public ResponseEntity<Map<String, String>> login(LoginRequest loginRequest, HttpServletResponse response) {
@@ -34,7 +34,7 @@ public class LoginService {
         Map<String, String> responseBody = new HashMap<>();
 
         try {
-            User user = userJpaRepository.findByEmail(email); //등록된 사용자인지 검증
+            User user = userRepository.findByEmail(email); //등록된 사용자인지 검증
             if(user == null) {
                 responseBody.put("message", "User를 찾을 수 없습니다");
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);

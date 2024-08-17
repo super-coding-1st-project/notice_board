@@ -2,7 +2,7 @@ package com.github.supercodingspring.supercodingproject1st.service.security;
 
 import com.github.supercodingspring.supercodingproject1st.repository.user.CustomUserDetails;
 import com.github.supercodingspring.supercodingproject1st.repository.entity.User;
-import com.github.supercodingspring.supercodingproject1st.repository.user.UserJpaRepository;
+import com.github.supercodingspring.supercodingproject1st.repository.user.UserRepository;
 import com.github.supercodingspring.supercodingproject1st.service.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
@@ -17,11 +17,11 @@ import java.util.Collections;
 @RequiredArgsConstructor
 @Primary
 public class CustomUserDetailService implements UserDetailsService {
-    private final UserJpaRepository userJpaRepository;
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userJpaRepository.findByEmail(email);
+        User user = userRepository.findByEmail(email);
         if (user == null) {
             throw new NotFoundException("User not found");
         }
