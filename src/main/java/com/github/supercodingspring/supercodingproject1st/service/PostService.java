@@ -90,7 +90,7 @@ public class PostService {
 
     public ResponseEntity<Map<String,String>> updatePost(Long id, PostRequest updatedPostRequest) {
         Map<String, String> responseBody = new HashMap<>();
-
+        log.info(updatedPostRequest.getTitle()+" "+updatedPostRequest.getContent());
         if(postRepository.findById(id).isPresent()){
             Post requestPost = postRepository.findById(id).get();
             requestPost.setTitle(updatedPostRequest.getTitle());

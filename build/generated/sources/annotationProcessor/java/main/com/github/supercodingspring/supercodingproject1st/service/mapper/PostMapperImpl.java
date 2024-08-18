@@ -7,7 +7,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-08-17T16:42:39+0900",
+    date = "2024-08-18T10:33:18+0900",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 22.0.1 (Oracle Corporation)"
 )
 public class PostMapperImpl implements PostMapper {
@@ -22,6 +22,7 @@ public class PostMapperImpl implements PostMapper {
 
         postDto.setAuthor( postUserUserName( post ) );
         postDto.setCreated_at( post.getCreatedAt() );
+        postDto.setId( post.getId() );
         postDto.setTitle( post.getTitle() );
         postDto.setContent( post.getContent() );
 

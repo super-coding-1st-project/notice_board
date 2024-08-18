@@ -16,38 +16,12 @@ import java.util.stream.Collectors;
 @Builder
 public class CommentWithChildrenDto {
 
-    private Long commentId;
-    private Long postId;
+    private Long id;
+    private Long post_id;
     private String content;
-    private String nickname;  // user
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private String userId;
-    private List<CommentResponseDto> children; // 자식 댓글 리스트 추가
+    private String author;  // user
+    private LocalDateTime created_at;
+//
 
-    public static CommentWithChildrenDto toDto(Comment comment) {
-        String userName = comment.getUser().getUserName();
-        if (userName == null || userName.isBlank()) {
-            userName = String.valueOf(comment.getUser().getUserId());
-        }
-
-        // 자식 댓글 리스트 변환, null인 경우 빈 리스트 반환
-        List<CommentResponseDto> childDtos = comment.getChildren() == null
-                ? Collections.emptyList()
-                : comment.getChildren().stream()
-                .map(CommentResponseDto::toDto)
-                .collect(Collectors.toList());
-
-        return CommentWithChildrenDto.builder()
-                .commentId(comment.getId())
-                .postId(comment.getPost().getId())
-                .content(comment.getContent())
-                .userId(String.valueOf(comment.getUser().getUserId()))
-                .createdAt(comment.getCreatedAt())
-                .updatedAt(comment.getModifiedAt())
-                .nickname(userName)
-                .children(childDtos) // 자식 댓글 리스트 추가
-                .build();
-    }
 
 }
