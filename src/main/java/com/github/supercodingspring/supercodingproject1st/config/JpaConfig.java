@@ -3,6 +3,7 @@ package com.github.supercodingspring.supercodingproject1st.config;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -40,6 +41,7 @@ public class JpaConfig {
     }
 
     @Bean(name = "tmJpa")
+    @Primary
     public PlatformTransactionManager transactionManager(@Qualifier("dataSource1") DataSource dataSource) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(localContainerEntityManagerFactoryBean(dataSource).getObject());

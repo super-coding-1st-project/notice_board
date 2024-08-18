@@ -6,8 +6,10 @@ import com.github.supercodingspring.supercodingproject1st.service.SignupService;
 import com.github.supercodingspring.supercodingproject1st.web.dto.LoginRequest;
 import com.github.supercodingspring.supercodingproject1st.web.dto.LogoutRequest;
 import com.github.supercodingspring.supercodingproject1st.web.dto.SignupRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +22,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RequestMapping("/api")
 @CrossOrigin
-
+@Slf4j
 public class SignController {
     private final SignupService signupService;
     private final LoginService loginService;
@@ -37,8 +39,8 @@ public class SignController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<Map<String, String>> logout(@RequestBody LogoutRequest logoutRequest, HttpServletResponse response) {
-        return logoutService.logout(logoutRequest, response);
+    public ResponseEntity<Map<String, String>> logout(@RequestBody LogoutRequest logoutRequest, HttpServletRequest request, HttpServletResponse response) {
+        return logoutService.logout(logoutRequest, request, response);
     }
 
 }

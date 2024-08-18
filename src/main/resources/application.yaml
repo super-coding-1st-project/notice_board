@@ -9,6 +9,7 @@ datasource:
 
 jwt:
   secret-key-source : ${JWT_SECRET_KEY}
+  token-valid-time : ${TOKEN_VALID_TIME}
 
 logging:
   config: classpath:logback-spring-local.xml
@@ -16,3 +17,14 @@ logging:
     org:
       hibernate:
         SQL: DEBUG
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+# spring data jpa 설정
+jpa:
+  open-in-view: false
+  properties:
+    dialect: org.hibernate.dialect.MySQLDialect
