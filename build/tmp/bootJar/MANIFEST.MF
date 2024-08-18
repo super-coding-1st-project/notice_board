@@ -1,13 +1,2 @@
 Manifest-Version: 1.0
-Main-Class: org.springframework.boot.loader.launch.JarLauncher
-Start-Class: com.github.supercodingspring.supercodingproject1st.SuperCod
- ingProject1stApplication
-Spring-Boot-Version: 3.3.2
-Spring-Boot-Classes: BOOT-INF/classes/
-Spring-Boot-Lib: BOOT-INF/lib/
-Spring-Boot-Classpath-Index: BOOT-INF/classpath.idx
-Spring-Boot-Layers-Index: BOOT-INF/layers.idx
-Build-Jdk-Spec: 22
-Implementation-Title: superCodingProject1st
-Implementation-Version: 0.0.1-SNAPSHOT
 

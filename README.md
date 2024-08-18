@@ -10,3 +10,6 @@
 
 2. application.yml 파일 설정
 - datasourc.url : 로컬에 맞게 DB주소 수정 필요
+
+3. DB 세팅
+- table_ddl.sql 파일을 사용하여 DB에 데이터베이스와 테이블을 추가후 프로젝트와 연동.
