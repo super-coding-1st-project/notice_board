@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+datasource:
+  username: root
+  password: qwe950505
+  url: jdbc:mysql://localhost:3306/superCodingProject1st
+  driver-class-name: com.mysql.cj.jdbc.Driver
+
+jwt:
+  secret-key-source : "test"
+  token-valid-time : 3600
+
+logging:
+  config: classpath:logback-spring-local.xml
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+# spring data jpa 설정
+jpa:
+  open-in-view: false
+  properties:
+    dialect: org.hibernate.dialect.MySQLDialect
