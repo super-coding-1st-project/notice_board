@@ -78,6 +78,7 @@ public class PostService {
                 .content(post.getContent()) //사용자가 입력한 내용
                 .createdAt(LocalDateTime.now().format(formatter)) //작성일시를 현재, 위의 formatter 형식으로
                 .user(user) //토큰을 파싱해서 가져온 userName
+                .likeCount(0) //처음 좋아요 개수 0
                 .build();
 
         postRepository.save(savePost); //JPA를 이용하여 DB에 저장

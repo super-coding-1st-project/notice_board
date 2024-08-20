@@ -18,4 +18,5 @@ public class PostDto {
     private String content;
     private String created_at;
     private String author;
+    private Integer likeCount;
 }

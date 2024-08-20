@@ -3,13 +3,13 @@ server:
 
 datasource:
   username: root
-  password: qwe950505
+  password: 12341234
   url: jdbc:mysql://localhost:3306/superCodingProject1st
   driver-class-name: com.mysql.cj.jdbc.Driver
 
 jwt:
-  secret-key-source : "test"
-  token-valid-time : 3600
+  secret-key-source : "super-coding"
+  token-valid-time : 3600000
 
 logging:
   config: classpath:logback-spring-local.xml
