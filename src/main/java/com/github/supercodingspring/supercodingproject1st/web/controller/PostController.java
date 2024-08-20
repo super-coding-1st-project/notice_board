@@ -13,6 +13,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+<<<<<<< HEAD
+=======
+import java.util.HashMap;
+>>>>>>> develop_great
 import java.util.List;
 import java.util.Map;
 
@@ -71,4 +75,25 @@ public class PostController {
         log.info("searchPosts request received");
         return postService.getAllPostsByEmail(email,request);
     }
+<<<<<<< HEAD
+=======
+
+    // 좋아요 기능
+    @PostMapping("/{postId}/like")
+    public ResponseEntity<Map<String, String>> likePost(@PathVariable Long postId, HttpServletRequest request) {
+        postService.likePost(postId);
+        Map<String, String> responseBody = new HashMap<>();
+        responseBody.put("message", "Post liked successfully");
+        return ResponseEntity.ok(responseBody);
+    }
+
+    // 싫어요 기능
+    @PostMapping("/{postId}/dislike")
+    public ResponseEntity<Map<String, String>> dislikePost(@PathVariable Long postId, HttpServletRequest request) {
+        postService.dislikePost(postId);
+        Map<String, String> responseBody = new HashMap<>();
+        responseBody.put("message", "Post disliked successfully");
+        return ResponseEntity.ok(responseBody);
+    }
+>>>>>>> develop_great
 }

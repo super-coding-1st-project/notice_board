@@ -18,4 +18,8 @@ public class PostDto {
     private String content;
     private String created_at;
     private String author;
+<<<<<<< HEAD
+=======
+    private Integer likeCount;
+>>>>>>> develop_great
 }

@@ -27,6 +27,12 @@ CREATE TABLE `posts` (
                          `created_at` datetime NOT NULL,
                          `user_id` int NOT NULL,
                          `comments_id` int DEFAULT NULL,
+<<<<<<< HEAD
+=======
+                         -- like 갯수를 저장할  column 추가
+                         `like_count` int DEFAULT 0,
+
+>>>>>>> develop_great
                          PRIMARY KEY (`id`),
                          KEY `posts_users_FK` (`user_id`),
                          CONSTRAINT `posts_users_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
