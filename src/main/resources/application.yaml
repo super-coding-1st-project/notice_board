@@ -2,24 +2,14 @@ server:
   port: 8080
 
 datasource:
-<<<<<<< HEAD
   username: ${DATABASE_USERNAME}
   password: ${DATABASE_PASSWORD}
-=======
-  username: root
-  password: 12341234
->>>>>>> develop_great
   url: jdbc:mysql://localhost:3306/superCodingProject1st
   driver-class-name: com.mysql.cj.jdbc.Driver
 
 jwt:
-<<<<<<< HEAD
   secret-key-source : ${JWT_SECRET_KEY}
   token-valid-time : ${TOKEN_VALID_TIME}
-=======
-  secret-key-source : "super-coding"
-  token-valid-time : 3600000
->>>>>>> develop_great
 
 logging:
   config: classpath:logback-spring-local.xml

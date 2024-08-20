@@ -12,12 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-<<<<<<< HEAD
-=======
 import java.util.HashMap;
->>>>>>> develop_great
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -75,8 +70,6 @@ public class PostController {
         log.info("searchPosts request received");
         return postService.getAllPostsByEmail(email,request);
     }
-<<<<<<< HEAD
-=======
 
     // 좋아요 기능
     @PostMapping("/{postId}/like")
@@ -95,5 +88,4 @@ public class PostController {
         responseBody.put("message", "Post disliked successfully");
         return ResponseEntity.ok(responseBody);
     }
->>>>>>> develop_great
 }

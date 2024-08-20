@@ -2,21 +2,15 @@ package com.github.supercodingspring.supercodingproject1st.repository.post;
 
 import com.github.supercodingspring.supercodingproject1st.repository.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
-<<<<<<< HEAD
-=======
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
->>>>>>> develop_great
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
-<<<<<<< HEAD
-=======
-
 
 //   like 데이터를 업데이트하기 위한 jpa function
     @Modifying
@@ -27,6 +21,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Query("UPDATE Post p SET p.likeCount = p.likeCount - 1 WHERE p.id = :postId")
     int decrementLikeCount(@Param("postId") Long postId);
 
->>>>>>> develop_great
     List<Post> findAllByUser_Email(String email);
 }

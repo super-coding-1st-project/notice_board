@@ -1,10 +1,8 @@
 package com.github.supercodingspring.supercodingproject1st.service;
 
-import com.github.supercodingspring.supercodingproject1st.config.security.JwtTokenProvider;
 import com.github.supercodingspring.supercodingproject1st.repository.entity.Post;
 import com.github.supercodingspring.supercodingproject1st.repository.entity.User;
 import com.github.supercodingspring.supercodingproject1st.repository.post.PostRepository;
-import com.github.supercodingspring.supercodingproject1st.repository.token.TokenRepository;
 import com.github.supercodingspring.supercodingproject1st.repository.user.UserRepository;
 import com.github.supercodingspring.supercodingproject1st.service.exception.NotFoundException;
 import com.github.supercodingspring.supercodingproject1st.service.mapper.PostMapper;
@@ -13,10 +11,7 @@ import com.github.supercodingspring.supercodingproject1st.web.dto.PostRequest;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import jakarta.annotation.PostConstruct;
-<<<<<<< HEAD
-=======
 import jakarta.persistence.EntityNotFoundException;
->>>>>>> develop_great
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -25,27 +20,17 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-<<<<<<< HEAD
-=======
 import org.springframework.transaction.annotation.Transactional;
->>>>>>> develop_great
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-
-<<<<<<< HEAD
-=======
-
->>>>>>> develop_great
 @Service
 @RequiredArgsConstructor
 public class PostService {
     private static final Logger log = LoggerFactory.getLogger(PostService.class);
     private final PostRepository postRepository;
     private final UserRepository userRepository;
-    private final TokenRepository tokenRepository;
-    private final JwtTokenProvider jwtTokenProvider;
 
     @Value("${jwt.secret-key-source}")
     private String secretKeySource;
@@ -87,10 +72,7 @@ public class PostService {
                 .content(post.getContent()) //사용자가 입력한 내용
                 .createdAt(LocalDateTime.now().format(formatter)) //작성일시를 현재, 위의 formatter 형식으로
                 .user(user) //토큰을 파싱해서 가져온 userName
-<<<<<<< HEAD
-=======
                 .likeCount(0) //처음 좋아요 개수 0
->>>>>>> develop_great
                 .build();
 
         postRepository.save(savePost); //JPA를 이용하여 DB에 저장
@@ -146,8 +128,6 @@ public class PostService {
         responseBody.put("posts", postDto);
         return ResponseEntity.ok(responseBody);
     }
-<<<<<<< HEAD
-=======
 
 
     @Transactional
@@ -165,5 +145,4 @@ public class PostService {
             throw new EntityNotFoundException("Post not found with id " + postId);
         }
     }
->>>>>>> develop_great
 }

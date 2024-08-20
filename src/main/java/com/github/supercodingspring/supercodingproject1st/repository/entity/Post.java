@@ -26,28 +26,13 @@ public class Post {
     private String content;
     @Column(name = "created_at")
     private String createdAt;
-<<<<<<< HEAD
-=======
     @Column(name = "like_count")
     private Integer likeCount;
->>>>>>> develop_great
-
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> develop_great
-    @OneToMany
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(name = "comments_id")
     private List<Comment> comments = new ArrayList<>();
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> develop_great
 }
