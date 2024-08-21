@@ -30,6 +30,7 @@ public class SignController {
 
     @PostMapping("/signup")
     public ResponseEntity<Map<String, String>> signup(@RequestBody SignupRequest signupRequest) {
+        log.info("유저네임!!!!"+signupRequest.getUsername());
         return signupService.signUp(signupRequest);
     }
 

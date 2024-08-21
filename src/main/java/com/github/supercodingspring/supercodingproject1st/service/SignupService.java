@@ -30,9 +30,8 @@ public class SignupService {
     public ResponseEntity<Map<String, String>> signUp(SignupRequest signupRequest) {
         String email = signupRequest.getEmail(); // 사용자가 입력한 email
         String password = signupRequest.getPassword(); // 사용자가 입력한 비밀번호
-        System.out.println(email+password);
+        String username = signupRequest.getUsername();
 
-        Integer userSerialNum = userRepository.findAll().size() + 1; //현재 저장된 유저 갯수 + 1
 
         Map<String,String > responseBody = new HashMap<>(); // 응답 객체 생성
 
@@ -54,7 +53,7 @@ public class SignupService {
                 .email(email)
                 .password(passwordEncoder.encode(password)) // 비밀번호 인코딩
                 .createdAt(LocalDateTime.now()) // 가입 시간 현재로 지정
-                .userName("user" + userSerialNum++) // 변수 사용하여 이름 자동 지정
+                .userName(username) // 변수 사용하여 이름 자동 지정
                 .build();
         userRepository.save(user);
         userPrincipalRepository.save(UserPrincipalRoles.builder()
