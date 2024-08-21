@@ -19,4 +19,5 @@ public class PostDto {
     private String created_at;
     private String author;
     private Integer likeCount;
+    private Boolean liked;
 }

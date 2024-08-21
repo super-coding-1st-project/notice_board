@@ -12,4 +12,5 @@ import lombok.ToString;
 public class PostRequest {
     private String title;
     private String content;
+    private String email;
 }

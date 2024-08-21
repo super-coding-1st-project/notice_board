@@ -2,6 +2,8 @@ package com.github.supercodingspring.supercodingproject1st.web.controller;
 
 import com.github.supercodingspring.supercodingproject1st.repository.entity.Post;
 import com.github.supercodingspring.supercodingproject1st.service.PostService;
+import com.github.supercodingspring.supercodingproject1st.web.dto.DeletePostRequest;
+import com.github.supercodingspring.supercodingproject1st.web.dto.LikeRequest;
 import com.github.supercodingspring.supercodingproject1st.web.dto.PostDto;
 import com.github.supercodingspring.supercodingproject1st.web.dto.PostRequest;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,9 +50,9 @@ public class PostController {
 
     // TODO 게시글 ID 검색 (id 검색. USER ID 아님.  + User Id 가 아니라 게시글 ID 라 본다면 틀린부분은 아니라고 보임. )
     @GetMapping("/{id}")
-    public ResponseEntity<PostDto> getPostById(@PathVariable Long id){
+    public ResponseEntity<PostDto> getPostById(@PathVariable Long id, HttpServletRequest request){
         log.info("getPostById request received");
-        return postService.getPostById(id);
+        return postService.getPostById(id, request);
     }
     // 작성 글 수정.
     @PutMapping("/{id}")
@@ -60,9 +62,10 @@ public class PostController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Map<String, String>> deletePost(@PathVariable Long id){
+    public ResponseEntity<Map<String, String>> deletePost(@PathVariable Long id, @RequestBody DeletePostRequest deletePostRequest){
         log.info("deletePost request received");
-        return postService.deletePost(id);
+        log.info(deletePostRequest.getEmail());
+        return postService.deletePost(id, deletePostRequest);
     }
 
     @GetMapping("/search")
@@ -73,19 +76,10 @@ public class PostController {
 
     // 좋아요 기능
     @PostMapping("/{postId}/like")
-    public ResponseEntity<Map<String, String>> likePost(@PathVariable Long postId, HttpServletRequest request) {
-        postService.likePost(postId);
-        Map<String, String> responseBody = new HashMap<>();
-        responseBody.put("message", "Post liked successfully");
-        return ResponseEntity.ok(responseBody);
-    }
+    public ResponseEntity<Map<String, Object
+            >> likePost(@RequestBody LikeRequest likeRequest,@PathVariable Long postId) {
+        log.info("likePost request received");
+        return postService.likePost(likeRequest,postId);
 
-    // 싫어요 기능
-    @PostMapping("/{postId}/dislike")
-    public ResponseEntity<Map<String, String>> dislikePost(@PathVariable Long postId, HttpServletRequest request) {
-        postService.dislikePost(postId);
-        Map<String, String> responseBody = new HashMap<>();
-        responseBody.put("message", "Post disliked successfully");
-        return ResponseEntity.ok(responseBody);
     }
 }

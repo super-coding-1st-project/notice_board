@@ -1,0 +1,13 @@
+package com.github.supercodingspring.supercodingproject1st.repository;
+
+import com.github.supercodingspring.supercodingproject1st.repository.entity.Post;
+import com.github.supercodingspring.supercodingproject1st.repository.entity.User;
+import com.github.supercodingspring.supercodingproject1st.repository.entity.UserLikes;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface UserLikesRepository extends JpaRepository<UserLikes, Long> {
+    public UserLikes findByUserAndPost(User user, Post post);
+    public Boolean existsByUserAndPost(User user, Post post);
+}

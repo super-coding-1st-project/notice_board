@@ -1,17 +1,23 @@
 package com.github.supercodingspring.supercodingproject1st.service;
 
+import com.github.supercodingspring.supercodingproject1st.repository.UserLikesRepository;
 import com.github.supercodingspring.supercodingproject1st.repository.entity.Post;
 import com.github.supercodingspring.supercodingproject1st.repository.entity.User;
+import com.github.supercodingspring.supercodingproject1st.repository.entity.UserLikes;
 import com.github.supercodingspring.supercodingproject1st.repository.post.PostRepository;
 import com.github.supercodingspring.supercodingproject1st.repository.user.UserRepository;
 import com.github.supercodingspring.supercodingproject1st.service.exception.NotFoundException;
 import com.github.supercodingspring.supercodingproject1st.service.mapper.PostMapper;
+import com.github.supercodingspring.supercodingproject1st.web.dto.DeletePostRequest;
+import com.github.supercodingspring.supercodingproject1st.web.dto.LikeRequest;
 import com.github.supercodingspring.supercodingproject1st.web.dto.PostDto;
 import com.github.supercodingspring.supercodingproject1st.web.dto.PostRequest;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import jakarta.annotation.PostConstruct;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.persistence.PersistenceContext;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -31,6 +37,9 @@ public class PostService {
     private static final Logger log = LoggerFactory.getLogger(PostService.class);
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    @PersistenceContext
+    private final EntityManager entityManager;
+    private final UserLikesRepository userLikesRepository;
 
     @Value("${jwt.secret-key-source}")
     private String secretKeySource;
@@ -43,8 +52,17 @@ public class PostService {
     }
 
     public ResponseEntity<Map<String, Object>> getAllPosts(HttpServletRequest request) {
+        String userEmail = request.getHeader("Email");
+        User currentUser = userRepository.findByEmail(userEmail);
 
-        List<PostDto> postList =  postRepository.findAll().stream().map(PostMapper.INSTANCE::PosttoPostDto).toList();
+        List<PostDto> postList =  postRepository.findAll().stream()
+                .map(post->{
+                        PostDto postDto = PostMapper.INSTANCE.PosttoPostDto(post);
+                        Boolean isLiked = userLikesRepository.existsByUserAndPost(currentUser, post);
+                        postDto.setLiked(isLiked);
+                        return postDto;
+                }).toList();
+
         Map<String, Object> responseBody = new HashMap<>();
 
         responseBody.put("posts", postList);
@@ -80,44 +98,61 @@ public class PostService {
         return ResponseEntity.ok(responseBody);
     }
 
-    public ResponseEntity<PostDto> getPostById(Long id) {
+    public ResponseEntity<PostDto> getPostById(Long id, HttpServletRequest request) {
         Optional<Post> post = postRepository.findById(id);
         PostDto postDto = PostMapper.INSTANCE.PosttoPostDto(post.get());
+        User user = userRepository.findByEmail(request.getHeader("Email"));
+        if(user.getUserLikes().stream().map(UserLikes::getPost).toList().contains(post))
+            postDto.setLiked(true);
+        else
+            postDto.setLiked(false);
+
         return ResponseEntity.ok(postDto);
     }
 
     public ResponseEntity<Map<String,String>> updatePost(Long id, PostRequest updatedPostRequest) {
         Map<String, String> responseBody = new HashMap<>();
         log.info(updatedPostRequest.getTitle()+" "+updatedPostRequest.getContent());
-        if(postRepository.findById(id).isPresent()){
-            Post requestPost = postRepository.findById(id).get();
-            requestPost.setTitle(updatedPostRequest.getTitle());
-            requestPost.setContent(updatedPostRequest.getContent());
-            requestPost.setCreatedAt(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-            postRepository.save(requestPost);
+        Post requestPost = postRepository.findById(id).get();
+        if(requestPost.getUser() == userRepository.findByEmail(updatedPostRequest.getEmail())) {
+            if (postRepository.findById(id).isPresent()) {
+                requestPost.setTitle(updatedPostRequest.getTitle());
+                requestPost.setContent(updatedPostRequest.getContent());
+                requestPost.setCreatedAt(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                postRepository.save(requestPost);
 
-            responseBody.put("title",updatedPostRequest.getTitle());
-            responseBody.put("content",updatedPostRequest.getContent());
+                responseBody.put("title", updatedPostRequest.getTitle());
+                responseBody.put("content", updatedPostRequest.getContent());
 
-            return ResponseEntity.ok(responseBody);
-        }
-        else {
-            responseBody.put("message","수정에 실패했습니다.");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
+                return ResponseEntity.ok(responseBody);
+            } else {
+                responseBody.put("message", "수정에 실패했습니다.");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
+            }
+        }else {
+            responseBody.put("message","권한이 없습니다.");
+            return ResponseEntity.unprocessableEntity().body(responseBody);
         }
     }
 
-    public ResponseEntity<Map<String, String>> deletePost(Long id) {
+    public ResponseEntity<Map<String, String>> deletePost(Long id, DeletePostRequest deletedPostRequest) {
         Map<String, String> responseBody = new HashMap<>();
-        if (postRepository.existsById(id)) {
-            postRepository.deleteById(id);
-            responseBody.put("message","성공적으로 삭제했습니다.");
-            return ResponseEntity.ok(responseBody);
-            // 204 No Content -> 200 ok에 성공적으로 삭제했다는 메제지를 담아 클라이언트에 응답하는 것이 낫다고 판단하여 수정하였습니다. (장태영)
-        } else {
-            responseBody.put("message","삭제에 실패했습니다.");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
-            // 404 Not Found
+        Post requestPost = postRepository.findById(id).get();
+        if(requestPost.getUser() == userRepository.findByEmail(deletedPostRequest.getEmail())) {
+            if (postRepository.existsById(id)) {
+                postRepository.deleteById(id);
+                responseBody.put("message","성공적으로 삭제했습니다.");
+                return ResponseEntity.ok(responseBody);
+                // 204 No Content -> 200 ok에 성공적으로 삭제했다는 메제지를 담아 클라이언트에 응답하는 것이 낫다고 판단하여 수정하였습니다. (장태영)
+            } else {
+                responseBody.put("message","삭제에 실패했습니다.");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
+                // 404 Not Found
+            }
+        }
+        else {
+            responseBody.put("message","권한이 없습니다.");
+            return ResponseEntity.unprocessableEntity().body(responseBody);
         }
     }
 
@@ -129,20 +164,45 @@ public class PostService {
         return ResponseEntity.ok(responseBody);
     }
 
-
     @Transactional
-    public void likePost(Long postId) {
-        int updatedRows = postRepository.incrementLikeCount(postId);
-        if (updatedRows == 0) {
-            throw new EntityNotFoundException("Post not found with id " + postId);
+    public ResponseEntity<Map<String,Object>> likePost(LikeRequest likeRequest, Long postId) {
+        Map<String, Object> responseBody = new HashMap<>();
+        User user = userRepository.findByEmail(likeRequest.getEmail());
+        Post post = postRepository.findById(postId)
+                .orElseThrow(() -> new EntityNotFoundException("Post not found with id " + postId));
+        log.info(user.toString(),post.toString());
+
+        List<Post> posts = user.getUserLikes().stream().map(UserLikes::getPost).toList();
+        Boolean isLiked = posts.contains(post);
+
+        if(isLiked) {
+            postRepository.decrementLikeCount(post.getId());
+            UserLikes userLikes = userLikesRepository.findByUserAndPost(user, post);
+            userLikesRepository.delete(userLikes);
+            user.getUserLikes().remove(userLikes);
+            responseBody.put("liked",false);
+            isLiked = false;
+        }else {
+            postRepository.incrementLikeCount(post.getId());
+            UserLikes userLikes = userLikesRepository.save(new UserLikes(user,post));
+            user.getUserLikes().add(userLikes);
+            responseBody.put("liked",true);
+            isLiked = true;
         }
+        postRepository.flush();
+        userRepository.flush();
+
+        entityManager.clear();
+
+        post = postRepository.findById(postId).get();
+        log.info(post.getLikeCount().toString());
+
+        responseBody.put("message", isLiked ? "좋아요를 눌렀습니다.":"좋아요를 취소했습니다.");
+        responseBody.put("likeCount", post.getLikeCount());
+        log.info(user.getUserLikes().toString(), post);
+        log.info(post.getLikeCount().toString());
+
+        return ResponseEntity.ok(responseBody);
     }
 
-    @Transactional
-    public void dislikePost(Long postId) {
-        int updatedRows = postRepository.decrementLikeCount(postId);
-        if (updatedRows == 0) {
-            throw new EntityNotFoundException("Post not found with id " + postId);
-        }
-    }
 }
