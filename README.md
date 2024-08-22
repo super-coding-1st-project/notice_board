@@ -22,6 +22,6 @@
   - JWT_SECRET_KEY : 사용자에 맞게 설정.
   - TOKEN_VALIDE_TIME : 기본값 3600000ms(한시간으로 설정)
 
-
-
-
+![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
+![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
