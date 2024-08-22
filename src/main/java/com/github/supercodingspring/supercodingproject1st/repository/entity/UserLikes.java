@@ -33,8 +33,7 @@ public class UserLikes {
     @Override
     public String toString() {
         return "UserLikes{" +
-                "id=" + id +
-                ", user=" + user.getUserName() +
+                "user=" + user.getUserName() +
                 ", post=" + post.getId() +
                 '}';
     }

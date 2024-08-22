@@ -131,7 +131,7 @@ public class PostService {
             }
         }else {
             responseBody.put("message","권한이 없습니다.");
-            return ResponseEntity.unprocessableEntity().body(responseBody);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(responseBody);
         }
     }
 
@@ -152,7 +152,7 @@ public class PostService {
         }
         else {
             responseBody.put("message","권한이 없습니다.");
-            return ResponseEntity.unprocessableEntity().body(responseBody);
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(responseBody);
         }
     }
 
