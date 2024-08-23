@@ -22,6 +22,11 @@
   - JWT_SECRET_KEY : 사용자에 맞게 설정.
   - TOKEN_VALIDE_TIME : 기본값 3600000ms(한시간으로 설정)
 
+3. DB 세팅
+- table_ddl.sql 파일을 사용하여 DB에 데이터베이스와 테이블을 추가후 프로젝트와 연동.
+
+
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
 ![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
+

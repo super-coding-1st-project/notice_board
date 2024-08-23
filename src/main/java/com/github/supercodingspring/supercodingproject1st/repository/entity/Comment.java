@@ -28,8 +28,12 @@ public class Comment {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @JoinColumn(name = "author")
+    @Column(name = "author")
     private String author;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(name = "content", length = 300)
     private String content;

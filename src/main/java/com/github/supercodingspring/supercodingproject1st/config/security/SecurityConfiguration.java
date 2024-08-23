@@ -45,8 +45,10 @@ public class SecurityConfiguration {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers("/swagger", "/swagger-ui.html", "/swagger-ui/**", "/api-docs", "/api-docs/**", "/v3/api-docs/**").permitAll()
                         .requestMatchers("/resources/static/**", "/api/signup", "/api/login").permitAll() //인가 설정 , signup, login 페이지는 누구에게나
                         .requestMatchers("/api/**").hasRole("USER") //인가 설정, 포스트와 로그아웃 요청은 USER에게만
+                        .anyRequest().authenticated()
                 ).exceptionHandling(exceptionHandler->exceptionHandler
                         .accessDeniedHandler(new CustomerAccessDeniedHandler())
                         .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
