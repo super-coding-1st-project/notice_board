@@ -23,8 +23,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override // 클라이언트 요청이 들어오면 필터를 제일 먼저 거침
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String jwtToken = jwtTokenProvider.resolveToken(request);
+        String requestURI = request.getRequestURI();
 
-        if("/api/login".equals(request.getRequestURI()) || "/api/signup".equals(request.getRequestURI())) {
+        // Swagger 관련 경로와 로그인/회원가입 경로는 필터를 건너뛰도록 설정
+        if (    requestURI.startsWith("/swagger-ui.html") ||
+                requestURI.startsWith("/swagger-ui/") ||
+                requestURI.startsWith("/v3/api-docs/") ||
+                requestURI.startsWith("/swagger-resources/") ||
+                requestURI.startsWith("/webjars/") ||
+                "/api/login".equals(requestURI) ||
+                "/api/signup".equals(requestURI)) {
             filterChain.doFilter(request, response);
             return;
         }

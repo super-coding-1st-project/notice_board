@@ -4,6 +4,7 @@ import com.github.supercodingspring.supercodingproject1st.repository.entity.Comm
 import com.github.supercodingspring.supercodingproject1st.service.CommentService;
 import com.github.supercodingspring.supercodingproject1st.web.dto.CommentRequestDto;
 import com.github.supercodingspring.supercodingproject1st.web.dto.CommentUpdateRequestDto;
+import com.github.supercodingspring.supercodingproject1st.web.dto.DeletePostRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -34,7 +35,7 @@ public class CommentController {
 
     // 댓글 작성
     @PostMapping("/comments")
-    public ResponseEntity<Map<String, String>> createComment(
+    public ResponseEntity<Map<String, Object>> createComment(
             @RequestBody CommentRequestDto dto, HttpServletRequest request) {
 
         log.info("author : "+dto.getAuthor()+", content : "+dto.getContent()+", post_id : "+dto.getPost_id());
@@ -44,32 +45,13 @@ public class CommentController {
 
 
     @PutMapping("/comments/{comment_id}")
-    public ResponseEntity<?> updateCommentById(@PathVariable Long comment_id, @RequestBody CommentUpdateRequestDto dto) {
-        try {
-            Comment comment = commentService.updateCommentById(comment_id, dto);
-
-            Map<String, Object> response = new HashMap<>();
-            response.put("message", "댓글이 성공적으로 수정되었습니다.");
-            return ResponseEntity.ok().body(response);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(Collections.singletonMap("message", e.getMessage()));
-        } catch (Exception e) {
-            // 기타 예외 처리
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("message", e.getMessage()));
-        }
+    public ResponseEntity<Map<String, Object>> updateCommentById(@PathVariable Long comment_id, @RequestBody CommentUpdateRequestDto dto) {
+        return commentService.updateCommentById(comment_id, dto);
     }
 
-//
-//    @DeleteMapping("/comments/{commentId}")
-//    public ResponseEntity<?> deleteByCommentId(@PathVariable Long commentId) {
-//        try {
-//            commentService.deleteById(commentId, userId);
-//            return ResponseEntity.ok().body(Collections.singletonMap("message", "게시글이 성공적으로 삭제되었습니다."));
-//        } catch (IllegalArgumentException e) {
-//            return ResponseEntity.badRequest().body(Collections.singletonMap("message", e.getMessage()));
-//        } catch (Exception e) {
-//            // 기타 예외 처리
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Collections.singletonMap("message", e.getMessage()));
-//        }
-//    }
+
+    @DeleteMapping("/comments/{commentId}")
+    public ResponseEntity<?> deleteByCommentId(@PathVariable Long commentId, @RequestBody DeletePostRequest deletePostRequest) {
+        return commentService.deleteById(commentId, deletePostRequest);
+    }
 }
