@@ -5,7 +5,7 @@
 - 현재 구현된 기능
   - 회원가입, 로그인, 로그아웃 구현(Spring security, JWT 토큰 사용하여 구현)
   - 게시물 작성, 수정, 삭제, 조회 기능 구현 (Spring JPA, MySQL 사용하여 구현)
-  - 댓글 작성, 수정, 기능 구현 (Spring JPA, MySQL 사용하여 구현)
+  - 댓글 작성, 수정, 삭제 기능 구현 (Spring JPA, MySQL 사용하여 구현)
   - 좋아요, 좋아요 취소 기능 구현 (Spring JPA, MySQL 사용하여 구현)
 
 # 실행 전 설정해야할 내용
@@ -25,4 +25,8 @@
 3. DB 세팅
 - table_ddl.sql 파일을 사용하여 DB에 데이터베이스와 테이블을 추가후 프로젝트와 연동.
 
+
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
+![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
+![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
 
