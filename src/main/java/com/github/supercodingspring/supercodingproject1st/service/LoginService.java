@@ -38,8 +38,12 @@ public class LoginService {
             User user = userRepository.findByEmailFetchJoin(email)
                     .orElseThrow(()->new NotFoundException("User Not Found")); //등록된 사용자인지 검증
             if(user == null) {
-                responseBody.put("message", "User를 찾을 수 없습니다");
+                responseBody.put("message", "User를 찾을 수 없습니다.");
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
+            }
+            if(!user.getPassword().equals(password)) {
+                responseBody.put("message", "비밀번호를 확인하세요.");
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseBody);
             }
 
             Authentication authentication = authenticationManager.authenticate(
@@ -55,7 +59,8 @@ public class LoginService {
             responseBody.put("message","성공적으로 로그인하였습니다.");
             return ResponseEntity.ok(responseBody);
         }catch (Exception e){
-            throw new NotAcceptException("로그인 할 수 없습니다.");
+            responseBody.put("message", "로그인 할 수 없습니다.");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseBody);
         }
     }
 }
