@@ -40,4 +40,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<UserPrincipalRoles> userPrincipalRoles;
+
+    @OneToMany(mappedBy = "author")
+    private List<Comment> commentList = new ArrayList<>();
 }
