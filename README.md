@@ -5,7 +5,7 @@
 - 현재 구현된 기능
   - 회원가입, 로그인, 로그아웃 구현(Spring security, JWT 토큰 사용하여 구현)
   - 게시물 작성, 수정, 삭제, 조회 기능 구현 (Spring JPA, MySQL 사용하여 구현)
-  - 댓글 작성, 수정, 기능 구현 (Spring JPA, MySQL 사용하여 구현)
+  - 댓글 작성, 수정, 삭제 기능 구현 (Spring JPA, MySQL 사용하여 구현)
   - 좋아요, 좋아요 취소 기능 구현 (Spring JPA, MySQL 사용하여 구현)
 
 # 실행 전 설정해야할 내용
