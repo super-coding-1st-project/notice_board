@@ -4,16 +4,15 @@ import com.github.supercodingspring.supercodingproject1st.config.security.JwtTok
 import com.github.supercodingspring.supercodingproject1st.repository.token.TokenRepository;
 import com.github.supercodingspring.supercodingproject1st.repository.entity.User;
 import com.github.supercodingspring.supercodingproject1st.repository.user.UserRepository;
-import com.github.supercodingspring.supercodingproject1st.service.exception.NotAcceptException;
 import com.github.supercodingspring.supercodingproject1st.service.exception.NotFoundException;
 import com.github.supercodingspring.supercodingproject1st.web.dto.LoginRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,26 +25,19 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class LoginService {
-    private static final Logger log = LoggerFactory.getLogger(LoginService.class);
+//    private static final Logger log = LoggerFactory.getLogger(LoginService.class);
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-    private final TokenRepository tokenRepository;
 
-    public ResponseEntity<Map<String, String>> login(LoginRequest loginRequest, HttpServletResponse response) {
+    public void login(LoginRequest loginRequest, HttpServletResponse response) {
         String email = loginRequest.getEmail(); // 사용자가 입력한 email
         String password = loginRequest.getPassword(); // 사용자가 입력한 password
 
-        Map<String, String> responseBody = new HashMap<>();
-
         try {
             User user = userRepository.findByEmailFetchJoin(email)
-                    .orElseThrow(()->new NotFoundException("User Not Found")); //등록된 사용자인지 검증
-            if(user == null) {
-                responseBody.put("message", "User를 찾을 수 없습니다.");
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
-            }
+                    .orElseThrow(()->new NotFoundException("사용자를 찾을 수 없습니다.")); //등록된 사용자인지 검증
+
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(email, password) //객체를 생성하여 사용자가 입력한 이메일과 비밀번호를 전달
             );
@@ -56,11 +48,10 @@ public class LoginService {
 
             jwtTokenProvider.saveTokenStatus(token);
 
-            responseBody.put("message","성공적으로 로그인하였습니다.");
-            return ResponseEntity.ok(responseBody);
-        }catch (Exception e){
-            responseBody.put("message", "아이디 또는 비밀번호를 확인하세요.");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseBody);
+        }catch (NotFoundException e){
+            throw new NotFoundException("아이디 또는 비밀번호를 확인하세요.");
+        }catch (BadCredentialsException e){
+            throw new BadCredentialsException("인증에 실패하였습니다.");
         }
     }
 }
