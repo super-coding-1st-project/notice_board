@@ -5,12 +5,11 @@ import com.github.supercodingspring.supercodingproject1st.repository.entity.Post
 import com.github.supercodingspring.supercodingproject1st.repository.entity.User;
 import com.github.supercodingspring.supercodingproject1st.repository.post.PostRepository;
 import com.github.supercodingspring.supercodingproject1st.repository.user.UserRepository;
-import com.github.supercodingspring.supercodingproject1st.service.exception.NotFoundException;
 import com.github.supercodingspring.supercodingproject1st.service.mapper.CommentMapper;
 import com.github.supercodingspring.supercodingproject1st.web.dto.CommentRequestDto;
 import com.github.supercodingspring.supercodingproject1st.web.dto.CommentResponseDto;
 import com.github.supercodingspring.supercodingproject1st.web.dto.CommentUpdateRequestDto;
-import com.github.supercodingspring.supercodingproject1st.web.dto.DeletePostRequest;
+import com.github.supercodingspring.supercodingproject1st.web.dto.DeleteCommentRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -90,9 +89,9 @@ public class CommentService {
     }
 
     @Transactional
-    public ResponseEntity<Map<String, Object>> deleteById(Long commentId, DeletePostRequest deletePostRequest) {
+    public ResponseEntity<Map<String, Object>> deleteById(Long commentId, DeleteCommentRequest deleteCommentRequest) {
         Map<String, Object> response = new HashMap<>();
-        User user = userRepository.findByEmail(deletePostRequest.getEmail());
+        User user = userRepository.findByEmail(deleteCommentRequest.getEmail());
         Comment comment = commentRepository.findById(commentId).get();
         if(comment.getUser().equals(user)) {
             try {

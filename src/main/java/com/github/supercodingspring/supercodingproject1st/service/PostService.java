@@ -8,10 +8,7 @@ import com.github.supercodingspring.supercodingproject1st.repository.post.PostRe
 import com.github.supercodingspring.supercodingproject1st.repository.user.UserRepository;
 import com.github.supercodingspring.supercodingproject1st.service.exception.NotFoundException;
 import com.github.supercodingspring.supercodingproject1st.service.mapper.PostMapper;
-import com.github.supercodingspring.supercodingproject1st.web.dto.DeletePostRequest;
-import com.github.supercodingspring.supercodingproject1st.web.dto.LikeRequest;
-import com.github.supercodingspring.supercodingproject1st.web.dto.PostDto;
-import com.github.supercodingspring.supercodingproject1st.web.dto.PostRequest;
+import com.github.supercodingspring.supercodingproject1st.web.dto.*;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import jakarta.annotation.PostConstruct;
@@ -28,6 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.naming.AuthenticationException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -51,26 +49,21 @@ public class PostService {
                 .encodeToString(secretKeySource.getBytes());
     }
 
-    public ResponseEntity<Map<String, Object>> getAllPosts(HttpServletRequest request) {
+    public List<PostDto> getAllPosts(HttpServletRequest request) {
         String userEmail = request.getHeader("Email");
         User currentUser = userRepository.findByEmail(userEmail);
 
-        List<PostDto> postList =  postRepository.findAll().stream()
+        return postRepository.findAll().stream()
                 .map(post->{
-                        PostDto postDto = PostMapper.INSTANCE.PosttoPostDto(post);
-                        Boolean isLiked = userLikesRepository.existsByUserAndPost(currentUser, post);
-                        postDto.setLiked(isLiked);
-                        return postDto;
+                    PostDto postDto = PostMapper.INSTANCE.PosttoPostDto(post);
+                    Boolean isLiked = userLikesRepository.existsByUserAndPost(currentUser, post); //user의 좋아요 목록에 있는지 검사
+                    postDto.setLiked(isLiked);
+                    log.info(isLiked.toString());
+                    return postDto;
                 }).toList();
-
-        Map<String, Object> responseBody = new HashMap<>();
-
-        responseBody.put("posts", postList);
-        return ResponseEntity.ok(responseBody);
-
     }
 
-    public ResponseEntity<Map<String, String>> savePost(Post post, HttpServletRequest request) {
+    public void savePost(Post post, HttpServletRequest request) {
         //JWT TOKEN에서 user_name을 받아오기 위한 코드 추가 -> 로그인 기능과 관련
         String token = request.getHeader("Authorization");
         Map<String, String> responseBody = new HashMap<>();
@@ -94,16 +87,13 @@ public class PostService {
                     .build();
 
             postRepository.save(savePost); //JPA를 이용하여 DB에 저장
-            responseBody.put("message", "성공적으로 저장하였습니다."); //클라이언트 응답 메세지
-            return ResponseEntity.ok(responseBody);
         }catch (NotFoundException e ){
-            responseBody.put("message", e.getMessage());
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseBody);
+            throw new NotFoundException(e.getMessage());
         }
     }
 
-    public ResponseEntity<PostDto> getPostById(Long id, HttpServletRequest request) {
-        Optional<Post> post = postRepository.findById(id);
+    public PostDto getPostById(Long id, HttpServletRequest request) {
+        Optional<Post> post = Optional.ofNullable(postRepository.findById(id).orElseThrow(() -> new NotFoundException("게시물을 찾을 수 없습니다")));
         PostDto postDto = PostMapper.INSTANCE.PosttoPostDto(post.get());
         User user = userRepository.findByEmail(request.getHeader("Email"));
         if(user.getUserLikes().stream().map(UserLikes::getPost).toList().contains(post))
@@ -111,65 +101,48 @@ public class PostService {
         else
             postDto.setLiked(false);
 
-        return ResponseEntity.ok(postDto);
+        return postDto;
     }
 
-    public ResponseEntity<Map<String,String>> updatePost(Long id, PostRequest updatedPostRequest) {
-        Map<String, String> responseBody = new HashMap<>();
+    public Post updatePost(Long id, PostRequest updatedPostRequest) throws Exception {
         log.info(updatedPostRequest.getTitle()+" "+updatedPostRequest.getContent());
-        Post requestPost = postRepository.findById(id).get();
+
+        Post requestPost = postRepository.findById(id).orElseThrow(()->new NotFoundException("게시물을 찾을 수 없습니다."));
         if(requestPost.getUser() == userRepository.findByEmail(updatedPostRequest.getEmail())) {
             if (postRepository.findById(id).isPresent()) {
                 requestPost.setTitle(updatedPostRequest.getTitle());
                 requestPost.setContent(updatedPostRequest.getContent());
                 requestPost.setCreatedAt(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-                postRepository.save(requestPost);
+                return postRepository.save(requestPost);
 
-                responseBody.put("title", updatedPostRequest.getTitle());
-                responseBody.put("content", updatedPostRequest.getContent());
-
-                return ResponseEntity.ok(responseBody);
             } else {
-                responseBody.put("message", "수정에 실패했습니다.");
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
+                throw new EntityNotFoundException("게시물을 찾을 수 없습니다.");
             }
         }else {
-            responseBody.put("message","권한이 없습니다.");
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(responseBody);
+            throw new AuthenticationException("권한이 없습니다.");
         }
     }
 
-    public ResponseEntity<Map<String, String>> deletePost(Long id, DeletePostRequest deletedPostRequest) {
-        Map<String, String> responseBody = new HashMap<>();
-        Post requestPost = postRepository.findById(id).get();
+    public void deletePost(Long id, DeletePostRequest deletedPostRequest) throws Exception{
+        Post requestPost = postRepository.findById(id).orElseThrow(()->new NotFoundException("게시물을 찾을 수 없습니다."));
+
         if(requestPost.getUser() == userRepository.findByEmail(deletedPostRequest.getEmail())) {
-            if (postRepository.existsById(id)) {
-                postRepository.deleteById(id);
-                responseBody.put("message","성공적으로 삭제했습니다.");
-                return ResponseEntity.ok(responseBody);
-                // 204 No Content -> 200 ok에 성공적으로 삭제했다는 메제지를 담아 클라이언트에 응답하는 것이 낫다고 판단하여 수정하였습니다. (장태영)
-            } else {
-                responseBody.put("message","삭제에 실패했습니다.");
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
-                // 404 Not Found
-            }
+            postRepository.deleteById(requestPost.getId());
         }
         else {
-            responseBody.put("message","권한이 없습니다.");
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(responseBody);
+            throw new AuthenticationException("권한이 없습니다.");
         }
     }
 
-    public ResponseEntity<Map<String, Object>> getAllPostsByEmail(String email, HttpServletRequest request) {
-        Map<String, Object> responseBody = new HashMap<>();
+    public List<PostDto> getAllPostsByEmail(String email, HttpServletRequest request) {
         List<Post> posts = postRepository.findAllByUser_Email(email);
-        List<PostDto> postDto = posts.stream().map(PostMapper.INSTANCE::PosttoPostDto).toList();
-        responseBody.put("posts", postDto);
-        return ResponseEntity.ok(responseBody);
+        if(posts.isEmpty())
+            throw new NotFoundException("게시물을 찾을 수 없습니다.");
+        return posts.stream().map(PostMapper.INSTANCE::PosttoPostDto).toList();
     }
 
     @Transactional
-    public ResponseEntity<Map<String,Object>> likePost(LikeRequest likeRequest, Long postId) {
+    public PostDto likePost(LikeRequest likeRequest, Long postId) {
         Map<String, Object> responseBody = new HashMap<>();
 
         try{
@@ -201,17 +174,19 @@ public class PostService {
             entityManager.clear();
 
             post = postRepository.findById(postId).get();
-            log.info(post.getLikeCount().toString());
 
-            responseBody.put("message", isLiked ? "좋아요를 눌렀습니다.":"좋아요를 취소했습니다.");
-            responseBody.put("likeCount", post.getLikeCount());
+            log.info(post.getLikeCount().toString());
             log.info(user.getUserLikes().toString(), post);
             log.info(post.getLikeCount().toString());
 
-            return ResponseEntity.ok(responseBody);
+            PostDto postDto = PostMapper.INSTANCE.PosttoPostDto(post);
+            postDto.setLiked(isLiked);
+            postDto.setLikeCount(post.getLikeCount());
+
+            return postDto;
+
         }catch (EntityNotFoundException e){
-            responseBody.put("message", e.getMessage());
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
+           throw new NotFoundException(e.getMessage());
         }
 
     }

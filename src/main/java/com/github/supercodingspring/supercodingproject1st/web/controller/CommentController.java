@@ -1,20 +1,16 @@
 package com.github.supercodingspring.supercodingproject1st.web.controller;
 
-import com.github.supercodingspring.supercodingproject1st.repository.entity.Comment;
 import com.github.supercodingspring.supercodingproject1st.service.CommentService;
 import com.github.supercodingspring.supercodingproject1st.web.dto.CommentRequestDto;
 import com.github.supercodingspring.supercodingproject1st.web.dto.CommentUpdateRequestDto;
-import com.github.supercodingspring.supercodingproject1st.web.dto.DeletePostRequest;
+import com.github.supercodingspring.supercodingproject1st.web.dto.DeleteCommentRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 
 
@@ -51,7 +47,7 @@ public class CommentController {
 
 
     @DeleteMapping("/comments/{commentId}")
-    public ResponseEntity<?> deleteByCommentId(@PathVariable Long commentId, @RequestBody DeletePostRequest deletePostRequest) {
-        return commentService.deleteById(commentId, deletePostRequest);
+    public ResponseEntity<?> deleteByCommentId(@PathVariable Long commentId, @RequestBody DeleteCommentRequest deleteCommentRequest) {
+        return commentService.deleteById(commentId, deleteCommentRequest);
     }
 }
