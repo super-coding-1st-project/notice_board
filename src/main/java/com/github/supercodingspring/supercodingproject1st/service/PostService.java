@@ -79,23 +79,27 @@ public class PostService {
                 .setSigningKey(secretKey).parseClaimsJws(token).getBody(); //헤더에 포함된 토큰 파싱 과정
 
         String userName = claims.get("user_name").toString(); //파싱한 토큰에서 user_name을 가진 value를 가져와 userName 변수에 저장
+        try{
+            User user = userRepository.findUserByUserNameFetchJoin(userName) //토큰에서 가져온 userName으로 repository에서 user 객체 탐색
+                    .orElseThrow(()->new NotFoundException("User not found"));
 
-        User user = userRepository.findUserByUserNameFetchJoin(userName) //토큰에서 가져온 userName으로 repository에서 user 객체 탐색
-                .orElseThrow(()->new NotFoundException("User not found"));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            Post savePost = Post.builder() //빌더 패턴 사용
+                    .title(post.getTitle()) //사용자가 입력한 제목
+                    .content(post.getContent()) //사용자가 입력한 내용
+                    .createdAt(LocalDateTime.now().format(formatter)) //작성일시를 현재, 위의 formatter 형식으로
+                    .user(user) //토큰을 파싱해서 가져온 user
+                    .likeCount(0) //처음 좋아요 개수 0
+                    .build();
 
-        Post savePost = Post.builder() //빌더 패턴 사용
-                .title(post.getTitle()) //사용자가 입력한 제목
-                .content(post.getContent()) //사용자가 입력한 내용
-                .createdAt(LocalDateTime.now().format(formatter)) //작성일시를 현재, 위의 formatter 형식으로
-                .user(user) //토큰을 파싱해서 가져온 userName
-                .likeCount(0) //처음 좋아요 개수 0
-                .build();
-
-        postRepository.save(savePost); //JPA를 이용하여 DB에 저장
-        responseBody.put("message", "성공적으로 저장하였습니다."); //클라이언트 응답 메세지
-        return ResponseEntity.ok(responseBody);
+            postRepository.save(savePost); //JPA를 이용하여 DB에 저장
+            responseBody.put("message", "성공적으로 저장하였습니다."); //클라이언트 응답 메세지
+            return ResponseEntity.ok(responseBody);
+        }catch (NotFoundException e ){
+            responseBody.put("message", e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseBody);
+        }
     }
 
     public ResponseEntity<PostDto> getPostById(Long id, HttpServletRequest request) {
