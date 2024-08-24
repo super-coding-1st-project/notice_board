@@ -171,42 +171,49 @@ public class PostService {
     @Transactional
     public ResponseEntity<Map<String,Object>> likePost(LikeRequest likeRequest, Long postId) {
         Map<String, Object> responseBody = new HashMap<>();
-        User user = userRepository.findByEmail(likeRequest.getEmail());
-        Post post = postRepository.findById(postId)
-                .orElseThrow(() -> new EntityNotFoundException("Post not found with id " + postId));
-        log.info(user.toString(),post.toString());
 
-        List<Post> posts = user.getUserLikes().stream().map(UserLikes::getPost).toList();
-        Boolean isLiked = posts.contains(post);
+        try{
+            User user = userRepository.findByEmail(likeRequest.getEmail());
+            Post post = postRepository.findById(postId)
+                    .orElseThrow(() -> new EntityNotFoundException("Post not found with id " + postId));
+            log.info(user.toString(),post.toString());
 
-        if(isLiked) {
-            postRepository.decrementLikeCount(post.getId());
-            UserLikes userLikes = userLikesRepository.findByUserAndPost(user, post);
-            userLikesRepository.delete(userLikes);
-            user.getUserLikes().remove(userLikes);
-            responseBody.put("liked",false);
-            isLiked = false;
-        }else {
-            postRepository.incrementLikeCount(post.getId());
-            UserLikes userLikes = userLikesRepository.save(new UserLikes(user,post));
-            user.getUserLikes().add(userLikes);
-            responseBody.put("liked",true);
-            isLiked = true;
+            List<Post> posts = user.getUserLikes().stream().map(UserLikes::getPost).toList();
+            Boolean isLiked = posts.contains(post);
+
+            if(isLiked) {
+                postRepository.decrementLikeCount(post.getId());
+                UserLikes userLikes = userLikesRepository.findByUserAndPost(user, post);
+                userLikesRepository.delete(userLikes);
+                user.getUserLikes().remove(userLikes);
+                responseBody.put("liked",false);
+                isLiked = false;
+            }else {
+                postRepository.incrementLikeCount(post.getId());
+                UserLikes userLikes = userLikesRepository.save(new UserLikes(user,post));
+                user.getUserLikes().add(userLikes);
+                responseBody.put("liked",true);
+                isLiked = true;
+            }
+            postRepository.flush();
+            userRepository.flush();
+
+            entityManager.clear();
+
+            post = postRepository.findById(postId).get();
+            log.info(post.getLikeCount().toString());
+
+            responseBody.put("message", isLiked ? "좋아요를 눌렀습니다.":"좋아요를 취소했습니다.");
+            responseBody.put("likeCount", post.getLikeCount());
+            log.info(user.getUserLikes().toString(), post);
+            log.info(post.getLikeCount().toString());
+
+            return ResponseEntity.ok(responseBody);
+        }catch (EntityNotFoundException e){
+            responseBody.put("message", e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
         }
-        postRepository.flush();
-        userRepository.flush();
 
-        entityManager.clear();
-
-        post = postRepository.findById(postId).get();
-        log.info(post.getLikeCount().toString());
-
-        responseBody.put("message", isLiked ? "좋아요를 눌렀습니다.":"좋아요를 취소했습니다.");
-        responseBody.put("likeCount", post.getLikeCount());
-        log.info(user.getUserLikes().toString(), post);
-        log.info(post.getLikeCount().toString());
-
-        return ResponseEntity.ok(responseBody);
     }
 
 }

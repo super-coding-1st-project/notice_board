@@ -52,8 +52,6 @@ public class CommentService {
         User user = userRepository.findByEmail(dto.getEmail());
         Post post = postRepository.findById(dto.getPost_id()).orElse(null);
 
-        Integer id = user.getUserId();
-
         Comment comment = Comment.builder()
                 .content(content)
                 .author(author)
