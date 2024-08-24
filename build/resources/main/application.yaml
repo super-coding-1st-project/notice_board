@@ -2,15 +2,14 @@ server:
   port: 8080
 
 datasource:
-  username: ${DATABASE_USERNAME}
-  password: ${DATABASE_PASSWORD}
-  url: jdbc:mysql://localhost:3306/superCodingProject1st
+  username: root
+  password: 1234
+  url: jdbc:mysql://localhost:3306/superCodingProject1st?useUnicode=true&characterEncoding=UTF-8
   driver-class-name: com.mysql.cj.jdbc.Driver
 
 jwt:
-  secret-key-source : ${JWT_SECRET_KEY}
-  token-valid-time : ${TOKEN_VALID_TIME}
-
+  secret-key-source : JWT_SECRET_KEY
+  token-valid-time : 7200000
 logging:
   config: classpath:logback-spring-local.xml
   level:
@@ -19,6 +18,10 @@ logging:
         SQL: DEBUG
 spring:
   jpa:
+    #    hibernate:
+    #      ddl-auto: create  # 엔티티에 따라 테이블 자동 생성 및 업데이트
+    show-sql: true  # 실행되는 SQL 쿼리를 로그로 출력
+
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect

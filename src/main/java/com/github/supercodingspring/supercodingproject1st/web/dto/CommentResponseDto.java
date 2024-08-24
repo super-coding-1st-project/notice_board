@@ -13,9 +13,21 @@ import java.time.LocalDateTime;
 @Builder
 public class CommentResponseDto {
     private Long id;
-    private Long post_id;
+    private Long postId;
     private String content;
     private String author;  // user
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
+
+    public static CommentResponseDto toDto(Comment comment) {
+        return CommentResponseDto.builder()
+                .id(comment.getId())
+                .postId(comment.getPost().getId())
+                .content(comment.getContent())
+                .author(comment.getAuthor())
+                .createdAt(comment.getCreatedAt())
+                .build();
+
+
+    }
 
 }
