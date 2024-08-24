@@ -9,7 +9,9 @@ CREATE TABLE `comments` (
                             `user_id` int NOT NULL,
                             PRIMARY KEY (`id`),
                             KEY `comments_posts_FK` (`post_id`),
-                            CONSTRAINT `comments_posts_FK` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE
+                            KEY `comments_users_FK` (`user_id`),
+                            CONSTRAINT `comments_posts_FK` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE CASCADE,
+                            CONSTRAINT `comments_users_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `posts` (
