@@ -58,6 +58,7 @@ public class CommentService {
                 .content(dto.getContent())
                 .user(user)
                 .post(post)
+                .author(dto.getAuthor())
                 .createdAt(LocalDateTime.now())
                 .build();
 
@@ -73,7 +74,7 @@ public class CommentService {
 
         assert comment != null;
         if (!user.equals(comment.getUser())) {
-            throw new IllegalArgumentException("User not found for given userId");
+            throw new IllegalArgumentException("권한이 없습니다.");
         }
 
         comment.setContent(dto.getContent());
@@ -89,7 +90,7 @@ public class CommentService {
 
         assert comment != null;
         if(!user.equals(comment.getUser())) {
-            throw new IllegalArgumentException("User not found for given userId");
+            throw new IllegalArgumentException("권한이 없습니다.");
         }
         commentRepository.delete(comment);
     }

@@ -26,8 +26,5 @@ public class CommentResponseDto {
                 .author(comment.getAuthor())
                 .createdAt(comment.getCreatedAt())
                 .build();
-
-
     }
-
 }

@@ -34,7 +34,9 @@ public class CommentController {
     public ResponseEntity<?> getAllComments() {
         log.info("findAllComments");
         List<CommentResponseDto> comments = commentService.findAll();
-        return ResponseEntity.ok().body(comments);
+        Map<String, Object> response = new HashMap<>();
+        response.put("comments", comments);
+        return ResponseEntity.ok().body(response);
     }
 
     // 댓글 id로 가져오기
@@ -56,7 +58,7 @@ public class CommentController {
         try {
             Comment comment = commentService.createComment(dto);
             CommentResponseDto newComment = CommentResponseDto.toDto(comment);
-            Map response = new HashMap();
+            Map<String, Object> response = new HashMap<>();
             response.put("message","댓글이 성공적으로 등록되었습니다.");
             response.put("newComment", newComment);
             return new ResponseEntity<>(response, HttpStatus.CREATED);
