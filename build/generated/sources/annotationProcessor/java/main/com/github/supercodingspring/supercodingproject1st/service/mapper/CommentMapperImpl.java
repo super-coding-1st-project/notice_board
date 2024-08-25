@@ -7,8 +7,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-08-23T15:37:21+0900",
-    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 22.0.1 (Oracle Corporation)"
+    date = "2024-08-25T13:41:09+0900",
+    comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.12 (Eclipse Adoptium)"
 )
 public class CommentMapperImpl implements CommentMapper {
 
@@ -20,8 +20,8 @@ public class CommentMapperImpl implements CommentMapper {
 
         CommentResponseDto.CommentResponseDtoBuilder commentResponseDto = CommentResponseDto.builder();
 
-        commentResponseDto.post_id( commentPostId( comment ) );
-        commentResponseDto.created_at( comment.getCreatedAt() );
+        commentResponseDto.postId( commentPostId( comment ) );
+        commentResponseDto.createdAt( comment.getCreatedAt() );
         commentResponseDto.id( comment.getId() );
         commentResponseDto.content( comment.getContent() );
         commentResponseDto.author( comment.getAuthor() );
