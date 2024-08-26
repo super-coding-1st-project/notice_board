@@ -24,8 +24,10 @@ public class User {
     @Column(name = "id")
     private Integer userId;
 
+    @Builder.Default()
     @Column(name = "user_name")
-    private String userName;
+    private String userName = "Temp_User";
+
     @Column(name = "email")
     private String email;
 
