@@ -44,7 +44,7 @@ public class LoginService {
             SecurityContextHolder.getContext().setAuthentication(authentication); //현재 인증된 사용자의 정보를 저장
 
             String token = jwtTokenProvider.createToken(email,user.getUserName()); // email과 사용자 이름을 넣은 토큰 생성
-            response.setHeader("Authorization", token); //X-AUTH-TOKEN 이라는 헤더 이름으로 토큰을 넣어 설정
+            response.setHeader("Authorization", token); //Authorization 헤더에 토큰을 넣어 설정
 
             jwtTokenProvider.saveTokenStatus(token);
 

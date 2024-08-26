@@ -35,9 +35,9 @@ public class SignupService {
         String password = signupRequest.getPassword(); // 사용자가 입력한 비밀번호
         String username = signupRequest.getUsername();
 
-        if(email.isEmpty() || password.isEmpty()){ // 아이디나 비밀번호가 빈칸일때
-            log.error("email or password is empty");
-            throw new InvalidRequestException("이메일, 비밀번호는 필수입니다.");
+        if(email.isEmpty() || password.isEmpty() || username.isEmpty()){ // 아이디나 비밀번호가 빈칸일때
+            log.error("email or password or username is empty");
+            throw new InvalidRequestException("이메일, 비밀번호, 사용자이름은 필수입니다.");
         }
 
         if(userRepository.findByEmailFetchJoin(email).isPresent()){  //user 테이블에 email이 존재하는지 확인

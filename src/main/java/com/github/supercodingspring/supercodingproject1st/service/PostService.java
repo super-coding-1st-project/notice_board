@@ -58,7 +58,6 @@ public class PostService {
                     PostDto postDto = PostMapper.INSTANCE.PosttoPostDto(post);
                     Boolean isLiked = userLikesRepository.existsByUserAndPost(currentUser, post); //user의 좋아요 목록에 있는지 검사
                     postDto.setLiked(isLiked);
-                    log.info(isLiked.toString());
                     return postDto;
                 }).toList();
     }
@@ -143,8 +142,6 @@ public class PostService {
 
     @Transactional
     public PostDto likePost(LikeRequest likeRequest, Long postId) {
-        Map<String, Object> responseBody = new HashMap<>();
-
         try{
             User user = userRepository.findByEmail(likeRequest.getEmail());
             Post post = postRepository.findById(postId)
@@ -152,20 +149,18 @@ public class PostService {
             log.info(user.toString(),post.toString());
 
             List<Post> posts = user.getUserLikes().stream().map(UserLikes::getPost).toList();
-            Boolean isLiked = posts.contains(post);
+            boolean isLiked = posts.contains(post);
 
             if(isLiked) {
                 postRepository.decrementLikeCount(post.getId());
                 UserLikes userLikes = userLikesRepository.findByUserAndPost(user, post);
                 userLikesRepository.delete(userLikes);
                 user.getUserLikes().remove(userLikes);
-                responseBody.put("liked",false);
                 isLiked = false;
             }else {
                 postRepository.incrementLikeCount(post.getId());
                 UserLikes userLikes = userLikesRepository.save(new UserLikes(user,post));
                 user.getUserLikes().add(userLikes);
-                responseBody.put("liked",true);
                 isLiked = true;
             }
             postRepository.flush();
@@ -188,7 +183,6 @@ public class PostService {
         }catch (EntityNotFoundException e){
            throw new NotFoundException(e.getMessage());
         }
-
     }
 
 }

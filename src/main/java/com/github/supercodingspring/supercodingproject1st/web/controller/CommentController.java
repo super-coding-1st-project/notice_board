@@ -6,6 +6,10 @@ import com.github.supercodingspring.supercodingproject1st.web.dto.CommentRequest
 import com.github.supercodingspring.supercodingproject1st.web.dto.CommentResponseDto;
 import com.github.supercodingspring.supercodingproject1st.web.dto.CommentUpdateRequestDto;
 import com.github.supercodingspring.supercodingproject1st.web.dto.DeleteCommentRequest;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
@@ -23,6 +27,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
+@Tag(name = "CommentController", description = "댓글 관련 controller")
 public class CommentController {
 
     private static final Logger log = LoggerFactory.getLogger(CommentController.class);
@@ -30,6 +35,10 @@ public class CommentController {
 
 
     // 모든 댓글 가져오기
+    @Operation(summary = "모든 댓글 조회")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공적으로 불러왔습니다."),
+    })
     @GetMapping("/comments")
     public ResponseEntity<?> getAllComments() {
         log.info("findAllComments");
@@ -39,6 +48,10 @@ public class CommentController {
         return ResponseEntity.ok().body(response);
     }
 
+    @Operation(summary = "댓글 아이디로 댓글 조회")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공적으로 불러왔습니다."),
+    })
     // 댓글 id로 가져오기
     @GetMapping("/comments/{commentId}")
     public ResponseEntity<?> findByCommentId(@PathVariable Long commentId) {
@@ -49,6 +62,11 @@ public class CommentController {
 
 
     // 댓글 작성
+    @Operation(summary = "댓글 작성", description = "작성자와 내용을 입력받아 댓글 등록")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공적으로 등록했습니다."),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
     @PostMapping("/comments")
     public ResponseEntity<?> createComment(
             @RequestBody CommentRequestDto dto, HttpServletRequest request) {
@@ -70,6 +88,13 @@ public class CommentController {
 
 
     // 댓글 수정
+    @Operation(summary = "댓글 수정", description = "수정할 내용을 입력받아 댓글 수정")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공적으로 수정했습니다."),
+            @ApiResponse(responseCode = "400", description = "파라미터 오류"),
+            @ApiResponse(responseCode = "403", description = "권한이 없습니다."),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
     @PutMapping("/comments/{commentId}")
     public ResponseEntity<?> updateCommentById(@PathVariable Long commentId, @RequestBody CommentUpdateRequestDto dto) {
         try {
@@ -90,6 +115,13 @@ public class CommentController {
 
 
     // 댓글 삭제
+    @Operation(summary = "댓글 삭제", description = "삭제요청을 받아 댓글 삭제")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공적으로 삭제했습니다."),
+            @ApiResponse(responseCode = "400", description = "파라미터 오류"),
+            @ApiResponse(responseCode = "403", description = "권한이 없습니다."),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
     @DeleteMapping("/comments/{commentId}")
     public ResponseEntity<?> deleteByCommentId(@PathVariable Long commentId, @RequestBody DeleteCommentRequest deleteCommentRequest) {
         try {
