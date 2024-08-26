@@ -41,12 +41,5 @@ public class Comment {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Override
-    public String toString() {
-        return "Comment{" +
-                "author='" + author + '\'' +
-                ", content='" + content + '\'' +
-                ", createdAt=" + createdAt +
-                '}';
-    }
+
 }

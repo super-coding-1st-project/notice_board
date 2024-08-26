@@ -10,7 +10,7 @@ import org.mapstruct.factory.Mappers;
 public interface CommentMapper {
     public CommentMapper INSTANCE = Mappers.getMapper(CommentMapper.class);
 
-    @Mapping(target = "post_id", source = "post.id")
-    @Mapping(target = "created_at", source = "createdAt")
+    @Mapping(target = "postId", source = "post.id")
+    @Mapping(target = "createdAt", source = "createdAt")
     CommentResponseDto CommentToCommentResponseDto(Comment comment);
 }
