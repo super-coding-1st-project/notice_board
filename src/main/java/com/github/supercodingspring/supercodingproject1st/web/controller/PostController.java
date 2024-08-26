@@ -5,6 +5,7 @@ import com.github.supercodingspring.supercodingproject1st.service.PostService;
 import com.github.supercodingspring.supercodingproject1st.web.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -66,6 +67,13 @@ public class PostController {
     }
 
     // TODO 게시글 ID 검색 (id 검색. USER ID 아님.  + User Id 가 아니라 게시글 ID 라 본다면 틀린부분은 아니라고 보임. )
+    @Operation(summary = "게시물 아이디로 게시물 조회")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공적으로 불러왔습니다."),
+            @ApiResponse(responseCode = "404", description = "게시물을 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "403", description = "권한이 없습니다."),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<?> getPostById(@PathVariable Long id, HttpServletRequest request){
         Map<String, String> responseBody = new HashMap<>();
@@ -79,7 +87,16 @@ public class PostController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(responseBody);
         }
     }
+
+
     // 작성 글 수정.
+    @Operation(summary = "게시물 수정")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공적으로 불러왔습니다."),
+            @ApiResponse(responseCode = "404", description = "게시물을 찾을 수 없습니다."),
+            @ApiResponse(responseCode = "403", description = "권한이 없습니다."),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
     @PutMapping("/{id}")
     public ResponseEntity<Map<String, String>> updatePost(@PathVariable Long id, @RequestBody PostRequest updatePostRequest){
         Map<String, String> responseBody = new HashMap<>();
@@ -105,6 +122,11 @@ public class PostController {
         }
     }
 
+    @Operation(summary = "게시물 삭제")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공적으로 불러왔습니다."),
+            @ApiResponse(responseCode = "403", description = "권한이 없습니다."),
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, String>> deletePost(@PathVariable Long id, @RequestBody DeletePostRequest deletePostRequest){
         Map<String, String> responseBody = new HashMap<>();
@@ -119,6 +141,11 @@ public class PostController {
         }
     }
 
+    @Operation(summary = "작성자 이메일로 게시물 조회")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "성공적으로 불러왔습니다."),
+            @ApiResponse(responseCode = "404", description = "게시물을 찾을 수 없습니다."),
+    })
     @GetMapping("/search")
     public ResponseEntity<Map<String, Object>> getAllPostsByEmail(@RequestParam("author_email") String email, HttpServletRequest request){
         Map<String, Object> responseBody = new HashMap<>();
