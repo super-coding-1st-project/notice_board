@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+datasource:
+  username: ${DATABASE_USERNAME}
+  password: ${DATABASE_PASSWORD}
+  url: jdbc:mariadb://admin.cto824g8iqv2.ap-northeast-2.rds.amazonaws.com:3306/noticeBoard
+  driver-class-name: org.mariadb.jdbc.Driver
+
+jwt:
+  secret-key-source : ${JWT_SECRET_KEY}
+  token-valid-time : ${TOKEN_VALID_TIME}
+
+logging:
+  config: classpath:logback-spring-prod.xml
+
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  config:
+    activate:
+      on-profile: prod
+
+# spring data jpa 설정
+jpa:
+  open-in-view: false
+  properties:
+    dialect: org.hibernate.dialect.MySQLDialect
