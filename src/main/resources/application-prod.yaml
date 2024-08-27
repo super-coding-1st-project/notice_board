@@ -18,9 +18,11 @@ spring:
   config:
     activate:
       on-profile: prod
+  # spring data jpa 설정
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
+    show-sql: true
 
-# spring data jpa 설정
-jpa:
-  open-in-view: false
-  properties:
-    dialect: org.hibernate.dialect.MariaDBDialect
