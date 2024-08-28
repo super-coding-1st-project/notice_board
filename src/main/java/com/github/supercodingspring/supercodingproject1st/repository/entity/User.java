@@ -24,7 +24,7 @@ public class User {
     @Column(name = "id")
     private Integer userId;
 
-    @Builder.Default()
+    @Builder.Default
     @Column(name = "user_name")
     private String userName = "Temp_User";
 
@@ -37,12 +37,15 @@ public class User {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    @Builder.Default
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<UserLikes> userLikes = new HashSet<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "user")
-    private List<UserPrincipalRoles> userPrincipalRoles;
+    private List<UserPrincipalRoles> userPrincipalRoles = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "author")
     private List<Comment> commentList = new ArrayList<>();
 }
