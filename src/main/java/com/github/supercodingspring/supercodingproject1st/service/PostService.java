@@ -62,6 +62,7 @@ public class PostService {
                 }).toList();
     }
 
+    @Transactional(transactionManager = "tmJpa")
     public void savePost(Post post, HttpServletRequest request) {
         //JWT TOKEN에서 user_name을 받아오기 위한 코드 추가 -> 로그인 기능과 관련
         String token = request.getHeader("Authorization");
@@ -103,6 +104,7 @@ public class PostService {
         return postDto;
     }
 
+    @Transactional(transactionManager = "tmJpa")
     public Post updatePost(Long id, PostRequest updatedPostRequest) throws Exception {
         log.info(updatedPostRequest.getTitle()+" "+updatedPostRequest.getContent());
 
@@ -122,6 +124,7 @@ public class PostService {
         }
     }
 
+    @Transactional(transactionManager = "tmJpa")
     public void deletePost(Long id, DeletePostRequest deletedPostRequest) throws Exception{
         Post requestPost = postRepository.findById(id).orElseThrow(()->new NotFoundException("게시물을 찾을 수 없습니다."));
 
