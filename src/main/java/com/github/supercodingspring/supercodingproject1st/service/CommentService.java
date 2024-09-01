@@ -51,14 +51,13 @@ public class CommentService {
     // 댓글 생성
     @Transactional
     public Comment createComment(CommentRequestDto dto) {
-        User user = userRepository.findByEmail(dto.getEmail());
+        User user = userRepository.findByEmail(dto.getEmail()).orElseThrow(()->new NotFoundException("사용자를 찾을 수 없습니다."));
         Post post = postRepository.findById(dto.getPostId()).orElse(null);
 
         Comment comment = Comment.builder()
                 .content(dto.getContent())
                 .user(user)
                 .post(post)
-                .author(dto.getAuthor())
                 .createdAt(LocalDateTime.now())
                 .build();
 
@@ -69,7 +68,7 @@ public class CommentService {
     // 댓글 수정
     @Transactional
     public Comment updateCommentById(Long commentId, CommentUpdateRequestDto dto) {
-        User user = userRepository.findByEmail(dto.getEmail());
+        User user = userRepository.findByEmail(dto.getEmail()).orElseThrow(()->new NotFoundException("사용자를 찾을 수 없습니다."));
         Comment comment = commentRepository.findById(commentId).orElse(null);
 
         assert comment != null;
@@ -85,7 +84,7 @@ public class CommentService {
     // 댓글 삭제
     @Transactional
     public void deleteById(Long commentId, DeleteCommentRequest deleteCommentRequest) {
-        User user = userRepository.findByEmail(deleteCommentRequest.getEmail());
+        User user = userRepository.findByEmail(deleteCommentRequest.getEmail()).orElseThrow(()->new NotFoundException("사용자를 찾을 수 없습니다."));
         Comment comment = commentRepository.findById(commentId).orElse(null);;
 
         assert comment != null;

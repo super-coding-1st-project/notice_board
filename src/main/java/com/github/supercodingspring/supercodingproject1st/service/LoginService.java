@@ -1,26 +1,18 @@
 package com.github.supercodingspring.supercodingproject1st.service;
 
 import com.github.supercodingspring.supercodingproject1st.config.security.JwtTokenProvider;
-import com.github.supercodingspring.supercodingproject1st.repository.token.TokenRepository;
 import com.github.supercodingspring.supercodingproject1st.repository.entity.User;
 import com.github.supercodingspring.supercodingproject1st.repository.user.UserRepository;
 import com.github.supercodingspring.supercodingproject1st.service.exception.NotFoundException;
 import com.github.supercodingspring.supercodingproject1st.web.dto.LoginRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -35,7 +27,7 @@ public class LoginService {
         String password = loginRequest.getPassword(); // 사용자가 입력한 password
 
         try {
-            User user = userRepository.findByEmailFetchJoin(email)
+            User user = userRepository.findByEmail(email)
                     .orElseThrow(()->new NotFoundException("사용자를 찾을 수 없습니다.")); //등록된 사용자인지 검증
 
             Authentication authentication = authenticationManager.authenticate(

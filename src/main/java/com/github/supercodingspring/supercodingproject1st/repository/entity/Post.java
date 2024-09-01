@@ -41,11 +41,6 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-    @Builder.Default
-    @OneToMany(mappedBy = "post")
-    private List<UserLikes> userLikes = new ArrayList<>();
-
-
 
     @Override
     public String toString() {

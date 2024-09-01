@@ -1,6 +1,5 @@
 package com.github.supercodingspring.supercodingproject1st.repository.post;
 
-import com.github.supercodingspring.supercodingproject1st.repository.entity.Comment;
 import com.github.supercodingspring.supercodingproject1st.repository.entity.Post;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -21,9 +20,12 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     @Modifying
     @Query("UPDATE Post p SET p.likeCount = CASE WHEN p.likeCount > 0 THEN p.likeCount - 1 ELSE 0 END WHERE p.id = :postId")
     int decrementLikeCount(@Param("postId") Long postId);
-
-
-
+    
     List<Post> findAllByUser_Email(String email);
+
     Post findByUser_Email(String email);
+
+    @Query("SELECT p FROM Post p JOIN FETCH p.comments JOIN FETCH p.user u JOIN FETCH u.userLikes")
+    List<Post> findAllByFetchJoin();
+
 }

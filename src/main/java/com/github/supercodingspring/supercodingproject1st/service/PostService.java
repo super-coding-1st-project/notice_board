@@ -20,8 +20,6 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -51,7 +49,7 @@ public class PostService {
 
     public List<PostDto> getAllPosts(HttpServletRequest request) {
         String userEmail = request.getHeader("Email");
-        User currentUser = userRepository.findByEmail(userEmail);
+        User currentUser = userRepository.findByEmail(userEmail).orElseThrow(null);
 
         return postRepository.findAll().stream()
                 .map(post->{
@@ -73,7 +71,7 @@ public class PostService {
 
         String userName = claims.get("user_name").toString(); //파싱한 토큰에서 user_name을 가진 value를 가져와 userName 변수에 저장
         try{
-            User user = userRepository.findUserByUserNameFetchJoin(userName) //토큰에서 가져온 userName으로 repository에서 user 객체 탐색
+            User user = userRepository.findUserByUserName(userName) //토큰에서 가져온 userName으로 repository에서 user 객체 탐색
                     .orElseThrow(()->new NotFoundException("User not found"));
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -95,7 +93,7 @@ public class PostService {
     public PostDto getPostById(Long id, HttpServletRequest request) {
         Optional<Post> post = Optional.ofNullable(postRepository.findById(id).orElseThrow(() -> new NotFoundException("게시물을 찾을 수 없습니다")));
         PostDto postDto = PostMapper.INSTANCE.PosttoPostDto(post.get());
-        User user = userRepository.findByEmail(request.getHeader("Email"));
+        User user = userRepository.findByEmail(request.getHeader("Email")).orElse(null);
         if(user.getUserLikes().stream().map(UserLikes::getPost).toList().contains(post))
             postDto.setLiked(true);
         else
@@ -109,7 +107,7 @@ public class PostService {
         log.info(updatedPostRequest.getTitle()+" "+updatedPostRequest.getContent());
 
         Post requestPost = postRepository.findById(id).orElseThrow(()->new NotFoundException("게시물을 찾을 수 없습니다."));
-        if(requestPost.getUser() == userRepository.findByEmail(updatedPostRequest.getEmail())) {
+        if(requestPost.getUser() == userRepository.findByEmail(updatedPostRequest.getEmail()).orElse(null)) {
             if (postRepository.findById(id).isPresent()) {
                 requestPost.setTitle(updatedPostRequest.getTitle());
                 requestPost.setContent(updatedPostRequest.getContent());
@@ -128,7 +126,7 @@ public class PostService {
     public void deletePost(Long id, DeletePostRequest deletedPostRequest) throws Exception{
         Post requestPost = postRepository.findById(id).orElseThrow(()->new NotFoundException("게시물을 찾을 수 없습니다."));
 
-        if(requestPost.getUser() == userRepository.findByEmail(deletedPostRequest.getEmail())) {
+        if(requestPost.getUser() == userRepository.findByEmail(deletedPostRequest.getEmail()).orElse(null)) {
             postRepository.deleteById(requestPost.getId());
         }
         else {
@@ -146,7 +144,7 @@ public class PostService {
     @Transactional
     public PostDto likePost(LikeRequest likeRequest, Long postId) {
         try{
-            User user = userRepository.findByEmail(likeRequest.getEmail());
+            User user = userRepository.findByEmail(likeRequest.getEmail()).orElse(null);
             Post post = postRepository.findById(postId)
                     .orElseThrow(() -> new EntityNotFoundException("Post not found with id " + postId));
             log.info(user.toString(),post.toString());

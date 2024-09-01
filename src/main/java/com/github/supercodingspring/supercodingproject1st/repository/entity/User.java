@@ -1,6 +1,5 @@
 package com.github.supercodingspring.supercodingproject1st.repository.entity;
 
-import com.github.supercodingspring.supercodingproject1st.repository.UserLikesRepository;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -41,11 +40,11 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private Set<UserLikes> userLikes = new HashSet<>();
 
-    @Builder.Default
-    @OneToMany(mappedBy = "user")
-    private List<UserPrincipalRoles> userPrincipalRoles = new ArrayList<>();
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Builder.Default
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "user")
     private List<Comment> commentList = new ArrayList<>();
 }
